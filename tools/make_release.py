@@ -53,7 +53,8 @@ def build_zip(version):
                 arc = os.path.join("cortexm-" + version, os.path.relpath(full, CORE))
                 info = zipfile.ZipInfo(arc.replace(os.sep, "/"), date_time=(2026, 1, 1, 0, 0, 0))
                 info.compress_type = zipfile.ZIP_DEFLATED
-                info.external_attr = (0o755 if f.endswith(".sh") else 0o644) << 16
+                ejecutable = f.endswith(".sh") or f == "air105load"
+                info.external_attr = (0o755 if ejecutable else 0o644) << 16
                 z.writestr(info, open(full, "rb").read())
     data = open(path, "rb").read()
     return name, path, "SHA-256:" + hashlib.sha256(data).hexdigest(), str(len(data))

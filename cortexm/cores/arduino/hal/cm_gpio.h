@@ -113,6 +113,24 @@ CM_INLINE void cm_gpio_toggle(uint32_t p) {
 #define CM_PORT_IN_REG(port)   (&cm_swm_gpio[port]->DATA)
 #endif
 
+/* ===================== Estilo 5: MegaHunt / Air105 ======================= */
+#elif CM_GPIO_STYLE == 5
+/* Puertos A-F cada 0x10: IODR (bits 0-15 salida, 16-31 entrada),
+ * BSRR (0-15 pone a 1, 16-31 pone a 0, atómico), OEN (1 = entrada), PUE. */
+#define cmGpioRegs(port)  ((GPIO_TypeDef *)(GPIO_BASE + (uint32_t)(port) * 0x10u))
+#define cmPinRegs(p)      cmGpioRegs(cmPinPortIndex(p))
+
+CM_INLINE void cm_gpio_set(uint32_t p)  { cmPinRegs(p)->BSRR = cmPinMask(p); }
+CM_INLINE void cm_gpio_clr(uint32_t p)  { cmPinRegs(p)->BSRR = cmPinMask(p) << 16; }
+CM_INLINE uint32_t cm_gpio_read(uint32_t p) { return (cmPinRegs(p)->IODR >> (16u + cmPinBit(p))) & 1u; }
+CM_INLINE void cm_gpio_toggle(uint32_t p) {
+  GPIO_TypeDef *g = cmPinRegs(p);
+  uint32_t m = cmPinMask(p);
+  g->BSRR = (g->IODR & m) ? (m << 16) : m;
+}
+#define CM_PORT_OUT_REG(port)  (&cmGpioRegs(port)->IODR)
+#define CM_PORT_IN_REG(port)   (&cmGpioRegs(port)->IODR)
+
 #else
 #error "CM_GPIO_STYLE desconocido"
 #endif

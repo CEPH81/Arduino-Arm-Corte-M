@@ -20,6 +20,9 @@ UPLOAD = {
     "jlink":    ("SEGGER J-Link", "jlink", {}),
     "pyocd":    ("pyOCD (CMSIS-DAP, ST-LINK, J-Link; usa el pack del fabricante)", "pyocd", {}),
     "cubeprog": ("ST-LINK (STM32CubeProgrammer)", "stm32cubeprog", {}),
+    "air105":   ("USB-serie (cargador de la ROM del Air105)", "air105load",
+                 {"upload.protocol": "serial", "upload.use_1200bps_touch": "false",
+                  "upload.wait_for_upload_port": "false"}),
 }
 
 BOARDS = [
@@ -109,6 +112,18 @@ BOARDS = [
                  ("rc40", "40 MHz (RC interno, sin cristal)", "-DSYS_CLK=2"),
                  ("rc20", "20 MHz (RC interno) - modo seguro", "-DSYS_CLK=0")],
          upload=["jlink", "pyocd"]),
+    # ---------------------------------------------------------- MegaHunt
+    dict(id="core_air105", name="CORE-Air105 (Hezhou / LuatOS)", variant="CORE_AIR105",
+         mcu=M4F, flags="-DAIR105", vendor="MegaHunt/Air105",
+         hse=None, flash=4 * 1024 * 1024 - 4096, ram=640 * 1024,
+         jlink=None, openocd=None, pyocd=None,
+         clocks=[("c204", "204 MHz (cristal 12 MHz + PLL)", "-DAIR105_PLL=SYSCTRL_PLL_204MHz"),
+                 ("c168", "168 MHz", "-DAIR105_PLL=SYSCTRL_PLL_168MHz"),
+                 ("c108", "108 MHz (menos consumo)", "-DAIR105_PLL=SYSCTRL_PLL_108MHz"),
+                 ("rom", "El que deja la ROM - modo seguro", "")],
+         upload=["air105"],
+         # RTS corta la alimentación en la CORE-Air105: el Monitor Serie no debe activarlo
+         props={"monitor_port.serial.rts": "off"}),
 ]
 
 COMMON_MENUS = [
@@ -144,11 +159,14 @@ def gen():
         p("build.hse_flags", ("-D%s=%dUL" % b["hse"]) if b.get("hse") else "")
         p("upload.maximum_size", b["flash"])
         p("upload.maximum_data_size", b["ram"])
-        p("upload.jlink_device", b["jlink"])
+        if b.get("jlink"):
+            p("upload.jlink_device", b["jlink"])
         if b.get("openocd"):
             p("upload.openocd_target", b["openocd"])
         if b.get("pyocd"):
             p("upload.pyocd_target", b["pyocd"].lstrip("_"))
+        for k, v in b.get("props", {}).items():
+            p(k, v)
         for key, label, flags in b["clocks"]:
             p("menu.clock.%s" % key, label)
             p("menu.clock.%s.build.clock_flags" % key, flags)

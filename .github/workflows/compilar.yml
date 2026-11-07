@@ -24,6 +24,7 @@ jobs:
           - hc32f460jeta
           - swm181cb
           - swm34svet6
+          - core_air105
     steps:
       - uses: actions/checkout@v4
 

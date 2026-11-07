@@ -19,6 +19,7 @@ Canal: [MikrocontrollerCephs](https://www.youtube.com/@mikrocontrollersceph)
 | HC32F460JETA | HC32F460JE | M4F · 200 MHz | J-Link, pyOCD |
 | Synwit SWM181CBT6 (placa azul) | SWM181xB | M0 · 48 MHz | J-Link, pyOCD |
 | Synwit SWM34SVET6 | SWM341xE | M33F · 120 MHz | J-Link, pyOCD |
+| CORE-Air105 (Hezhou / LuatOS) | Air105 (MH1903S) | M4F · 204 MHz | USB-serie de la placa (sin sonda) |
 
 Pendiente: **CY8CKIT-043** (PSoC 4200M). Infineon no publica los headers de la PSoC 4200M fuera de PSoC Creator/ModusToolbox; se añadirá a partir de los archivos generados por esas herramientas.
 
@@ -43,6 +44,8 @@ En las placas marcadas "verificar" dentro de su `variant.h` (LED, botón o pines
 | WeAct Mini Debugger, DAPLink, GD-Link, AT-Link | *CMSIS-DAP / DAPLink (OpenOCD)* o *pyOCD* |
 | SEGGER J-Link | *SEGGER J-Link* (instalar el *J-Link Software* de SEGGER) |
 | Cualquiera, chips no-ST | *pyOCD*: `pip install pyocd` y una vez `pyocd pack install <objetivo>` |
+
+**CORE-Air105:** se carga por el mismo USB-C de la placa (conversor USB-serie). Elegir *USB-serie (cargador de la ROM del Air105)*, el puerto COM y **Subir**. La herramienta `air105load` reinicia el chip con la línea RTS y habla con el cargador de la ROM; no hace falta pulsar BOOT. El Monitor Serie debe estar cerrado durante la carga. Grabar un programa de Arduino borra LuatOS; se restaura con *Luatools* de Hezhou. LED integrado: PD14 (también PD15 y PC3). `Serial` = UART0 en PA0 (RX) / PA1 (TX).
 
 Los objetivos de pyOCD de cada placa están en `upload.pyocd_target` de `boards.txt` (p.ej. `gd32f427vk`, `hc32f460xe`, `swm341xe`).
 

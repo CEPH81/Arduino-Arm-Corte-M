@@ -9,6 +9,8 @@
 | AT32F403A/F435_437 Firmware Library (Artery) | `cortexm/system/Artery`, `system_at32*.c` | Licencia de Artery (uso con MCUs Artery) |
 | HC32F460 DDL 2.2 (HDSC) | `cortexm/system/HDSC`, `system_hc32f460.c` | BSD-3-Clause |
 | SWM181 / SWM341 Lib (Synwit) | `cortexm/system/Synwit`, `system_SWM*.c` | Apache-2.0 |
+| Air105 SDK MDK (MegaHunt / Hezhou) | `cortexm/system/MegaHunt` | Apache-2.0 |
+| Protocolo del cargador del Air105 (air105-uploader, racerxdl) | `tools/air105load` (reimplementado en Go) | Apache-2.0 |
 
 Archivos del fabricante modificados (marcados con `CEPH81` en el código):
 - `variants/GD32F427V_START/system_gd32f4xx.c`: reloj elegible desde el menú y

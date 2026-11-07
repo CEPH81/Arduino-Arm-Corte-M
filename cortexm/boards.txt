@@ -491,3 +491,44 @@ swm34svet6.menu.lto.off=Desactivado
 swm34svet6.menu.lto.off.build.lto=
 swm34svet6.menu.lto.on=Activado (-flto)
 swm34svet6.menu.lto.on.build.lto=-flto
+
+# ------------------------------------------------------------
+# CORE-Air105 (Hezhou / LuatOS)
+core_air105.name=CORE-Air105 (Hezhou / LuatOS)
+core_air105.build.core=arduino
+core_air105.build.board=CORE_AIR105
+core_air105.build.variant=CORE_AIR105
+core_air105.build.ldscript=ldscript.ld
+core_air105.build.mcu=-mcpu=cortex-m4 -mfloat-abi=hard -mfpu=fpv4-sp-d16
+core_air105.build.series_flags=-DAIR105
+core_air105.build.vendor_dir=MegaHunt/Air105
+core_air105.build.hse_flags=
+core_air105.upload.maximum_size=4190208
+core_air105.upload.maximum_data_size=655360
+core_air105.monitor_port.serial.rts=off
+core_air105.menu.clock.c204=204 MHz (cristal 12 MHz + PLL)
+core_air105.menu.clock.c204.build.clock_flags=-DAIR105_PLL=SYSCTRL_PLL_204MHz
+core_air105.menu.clock.c168=168 MHz
+core_air105.menu.clock.c168.build.clock_flags=-DAIR105_PLL=SYSCTRL_PLL_168MHz
+core_air105.menu.clock.c108=108 MHz (menos consumo)
+core_air105.menu.clock.c108.build.clock_flags=-DAIR105_PLL=SYSCTRL_PLL_108MHz
+core_air105.menu.clock.rom=El que deja la ROM - modo seguro
+core_air105.menu.clock.rom.build.clock_flags=
+core_air105.menu.upload_method.air105=USB-serie (cargador de la ROM del Air105)
+core_air105.menu.upload_method.air105.upload.tool=air105load
+core_air105.menu.upload_method.air105.upload.tool.default=air105load
+core_air105.menu.upload_method.air105.upload.protocol=serial
+core_air105.menu.upload_method.air105.upload.use_1200bps_touch=false
+core_air105.menu.upload_method.air105.upload.wait_for_upload_port=false
+core_air105.menu.opt.os=Más pequeño (-Os) [por defecto]
+core_air105.menu.opt.os.build.opt=-Os
+core_air105.menu.opt.o2=Rápido (-O2)
+core_air105.menu.opt.o2.build.opt=-O2
+core_air105.menu.opt.o3=Más rápido (-O3)
+core_air105.menu.opt.o3.build.opt=-O3
+core_air105.menu.opt.og=Depuración (-Og)
+core_air105.menu.opt.og.build.opt=-Og
+core_air105.menu.lto.off=Desactivado
+core_air105.menu.lto.off.build.lto=
+core_air105.menu.lto.on=Activado (-flto)
+core_air105.menu.lto.on.build.lto=-flto

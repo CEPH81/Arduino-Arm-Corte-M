@@ -3,7 +3,7 @@
 # https://arduino.github.io/arduino-cli/latest/platform-specification/
 
 name=Arduino Arm Cortex-M (CEPH81)
-version=0.2.0
+version=0.3.0
 
 # ---------------------------------------------------------------------------
 # Compilador: xPack GNU Arm Embedded GCC 14 (lo instala el Gestor de placas).
@@ -133,6 +133,22 @@ tools.stm32cubeprog.program.params.quiet=-q
 tools.stm32cubeprog.program.pattern="{path}/{cmd}" {program.verbose} -c port=SWD mode=UR -d "{build.path}/{build.project_name}.elf" -v -rst
 tools.stm32cubeprog.erase.pattern=
 tools.stm32cubeprog.bootloader.pattern=
+
+# ---------------------------------------------------------------------------
+# Carga: Air105 por USB-serie (cargador de la ROM; reinicia la placa con RTS)
+# Código fuente: tools/air105load
+# ---------------------------------------------------------------------------
+tools.air105load.path={runtime.platform.path}/tools
+tools.air105load.cmd=air105load
+tools.air105load.cmd.windows=air105load.exe
+tools.air105load.upload.params.verbose=-v
+tools.air105load.upload.params.quiet=
+tools.air105load.upload.pattern="{path}/{cmd}" {upload.verbose} -p "{serial.port}" "{build.path}/{build.project_name}.bin"
+tools.air105load.program.params.verbose=-v
+tools.air105load.program.params.quiet=
+tools.air105load.program.pattern="{path}/{cmd}" {program.verbose} -p "{serial.port}" "{build.path}/{build.project_name}.bin"
+tools.air105load.erase.pattern=
+tools.air105load.bootloader.pattern=
 
 # ---------------------------------------------------------------------------
 # Depuración en Arduino IDE 2 (OpenOCD con la interfaz del menú)

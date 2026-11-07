@@ -12,10 +12,12 @@
  *                   2 = CRL/CRH (STM32F1, AT32F403A)
  *                   3 = HC32 PORT (PCR/PFSR por pin)
  *                   4 = Synwit (GPIO DATA/DIR + PORT FUNC)
+ *                   5 = MegaHunt / Air105 (IODR/BSRR/OEN/PUE + ALT)
  *   CM_USART_STYLE  1 = SR/DR/BRR/CR1 (STM32F4, GD32F4, AT32)
  *                   2 = ISR/ICR/RDR/TDR (STM32 L4/G4/WB/H5)
  *                   3 = HC32 USART
  *                   4 = Synwit UART
+ *                   5 = Synopsys DesignWare 16550 (Air105)
  */
 #ifndef CORTEXM_DEVICE_H
 #define CORTEXM_DEVICE_H
@@ -104,6 +106,19 @@
   #endif
   #define CM_GPIO_STYLE   4
   #define CM_USART_STYLE  4
+
+/* ----------------------------- MegaHunt ----------------------------- */
+#elif defined(AIR105)
+  #define CM_VENDOR_MH 1
+  #ifdef __cplusplus
+  extern "C" {                      /* los headers de MegaHunt no traen extern "C" en todos */
+  #endif
+  #include "air105.h"
+  #ifdef __cplusplus
+  }
+  #endif
+  #define CM_GPIO_STYLE   5
+  #define CM_USART_STYLE  5
 
 #else
   #error "Familia de microcontrolador no soportada todavía por este núcleo"
