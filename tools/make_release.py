@@ -61,6 +61,8 @@ def build_zip(version):
 
 
 def main():
+    if len(sys.argv) > 1 and not __import__("re").fullmatch(r"\d+\.\d+\.\d+", sys.argv[1]):
+        sys.exit("uso: make_release.py [X.Y.Z]")
     version = platform_version(sys.argv[1] if len(sys.argv) > 1 else None)
     name, path, checksum, size = build_zip(version)
     tools = json.load(open(os.path.join(ROOT, "tools", "xpack_tools.json")))
