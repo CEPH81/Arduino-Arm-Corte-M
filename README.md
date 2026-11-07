@@ -102,7 +102,7 @@ Todas las familias arrancan con el mismo `Reset_Handler` en C (`startup/cm_start
 
 - Instalación manual: copiar o enlazar `cortexm/` a `<Sketchbook>/hardware/CEPH81/cortexm` y crear `cortexm/platform.local.txt` con `compiler.path=<ruta a arm-none-eabi-gcc>/bin/`.
 - Cada push compila los ejemplos en todas las placas (GitHub Actions, *Compilar placas*).
-- Para publicar una versión: `git tag v0.3.0 && git push origin v0.3.0`. El flujo *Publicar versión* crea la Release con el zip y actualiza el índice.
+- Para publicar una versión basta con subir `version=` en `cortexm/platform.txt` y hacer push a `main`: el flujo *Publicar versión* crea la etiqueta, la Release con el zip y actualiza el índice.
 
 ## Licencia
 
