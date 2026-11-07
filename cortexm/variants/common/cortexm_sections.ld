@@ -1,7 +1,8 @@
 /*
  * cortexm_sections.ld - Secciones comunes para todas las placas.
- * La variante define MEMORY { FLASH, RAM } y _Min_Stack_Size / _Min_Heap_Size
- * y luego hace INCLUDE de este archivo.
+ * La variante define MEMORY { FLASH, RAM }, REGION_ALIAS("VECTORS", ...)
+ * (normalmente FLASH) y _Min_Stack_Size / _Min_Heap_Size, y luego hace
+ * INCLUDE de este archivo.
  */
 ENTRY(Reset_Handler)
 
@@ -15,7 +16,7 @@ SECTIONS
     . = ALIGN(4);
     KEEP(*(.isr_vector))
     . = ALIGN(4);
-  } >FLASH
+  } >VECTORS
 
   .text :
   {

@@ -373,3 +373,41 @@ atstart_f437.menu.lto.off=Desactivado
 atstart_f437.menu.lto.off.build.lto=
 atstart_f437.menu.lto.on=Activado (-flto)
 atstart_f437.menu.lto.on.build.lto=-flto
+
+# ------------------------------------------------------------
+# HC32F460JETA (placa de desarrollo)
+hc32f460jeta.name=HC32F460JETA (placa de desarrollo)
+hc32f460jeta.build.core=arduino
+hc32f460jeta.build.board=HC32F460JETA
+hc32f460jeta.build.variant=HC32F460JETA
+hc32f460jeta.build.ldscript=ldscript.ld
+hc32f460jeta.build.mcu=-mcpu=cortex-m4 -mfloat-abi=hard -mfpu=fpv4-sp-d16
+hc32f460jeta.build.series_flags=-DHC32F460
+hc32f460jeta.build.vendor_dir=HDSC/HC32F460
+hc32f460jeta.build.hse_flags=-DXTAL_VALUE=8000000
+hc32f460jeta.upload.maximum_size=524288
+hc32f460jeta.upload.maximum_data_size=192512
+hc32f460jeta.upload.jlink_device=HC32F460xE
+hc32f460jeta.upload.pyocd_target=hc32f460xe
+hc32f460jeta.menu.clock.fast=200 MHz (XTAL 8 MHz + MPLL)
+hc32f460jeta.menu.clock.fast.build.clock_flags=
+hc32f460jeta.menu.clock.safe=8 MHz (MRC) - modo seguro
+hc32f460jeta.menu.clock.safe.build.clock_flags=-DCM_CLOCK_SAFE
+hc32f460jeta.menu.upload_method.jlink=SEGGER J-Link
+hc32f460jeta.menu.upload_method.jlink.upload.tool=jlink
+hc32f460jeta.menu.upload_method.jlink.upload.tool.default=jlink
+hc32f460jeta.menu.upload_method.pyocd=pyOCD (CMSIS-DAP, ST-LINK, J-Link; usa el pack del fabricante)
+hc32f460jeta.menu.upload_method.pyocd.upload.tool=pyocd
+hc32f460jeta.menu.upload_method.pyocd.upload.tool.default=pyocd
+hc32f460jeta.menu.opt.os=Más pequeño (-Os) [por defecto]
+hc32f460jeta.menu.opt.os.build.opt=-Os
+hc32f460jeta.menu.opt.o2=Rápido (-O2)
+hc32f460jeta.menu.opt.o2.build.opt=-O2
+hc32f460jeta.menu.opt.o3=Más rápido (-O3)
+hc32f460jeta.menu.opt.o3.build.opt=-O3
+hc32f460jeta.menu.opt.og=Depuración (-Og)
+hc32f460jeta.menu.opt.og.build.opt=-Og
+hc32f460jeta.menu.lto.off=Desactivado
+hc32f460jeta.menu.lto.off.build.lto=
+hc32f460jeta.menu.lto.on=Activado (-flto)
+hc32f460jeta.menu.lto.on.build.lto=-flto

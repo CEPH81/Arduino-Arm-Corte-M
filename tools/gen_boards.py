@@ -84,6 +84,14 @@ BOARDS = [
          clocks=[("fast", "288 MHz (HEXT 8 MHz + PLL)", ""),
                  ("safe", "8 MHz (HICK) - modo seguro", "-DCM_CLOCK_SAFE")],
          upload=["jlink", "pyocd"]),
+    # ------------------------------------------------------------ HDSC
+    dict(id="hc32f460jeta", name="HC32F460JETA (placa de desarrollo)", variant="HC32F460JETA",
+         mcu=M4F, flags="-DHC32F460", vendor="HDSC/HC32F460",
+         hse=("XTAL_VALUE", 8000000), flash=512 * 1024, ram=188 * 1024,
+         jlink="HC32F460xE", openocd=None, pyocd="hc32f460xe",
+         clocks=[("fast", "200 MHz (XTAL 8 MHz + MPLL)", ""),
+                 ("safe", "8 MHz (MRC) - modo seguro", "-DCM_CLOCK_SAFE")],
+         upload=["jlink", "pyocd"]),
 ]
 
 COMMON_MENUS = [

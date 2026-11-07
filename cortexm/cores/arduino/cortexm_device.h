@@ -71,7 +71,13 @@
 /* ------------------------------ HDSC -------------------------------- */
 #elif defined(HC32F460)
   #define CM_VENDOR_HC 1
-  #include "hc32f460.h"
+  #include "hc32_common.h"          /* incluye hc32f460.h */
+  #include "hc32f460_clk.h"
+  #include "hc32f460_efm.h"
+  #include "hc32f460_sram.h"
+  #include "hc32f460_gpio.h"
+  #include "hc32f460_usart.h"
+  #include "hc32f460_pwc.h"
   #define CM_GPIO_STYLE   3
   #define CM_USART_STYLE  3
 

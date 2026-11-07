@@ -28,8 +28,9 @@ static_assert((SERIAL_TX_BUFFER_SIZE & (SERIAL_TX_BUFFER_SIZE - 1)) == 0, "TX bu
 
 class HardwareSerialCM : public arduino::HardwareSerial {
 public:
-  HardwareSerialCM(uintptr_t base, int irq, uint8_t txPin, uint8_t txFn, uint8_t rxPin, uint8_t rxFn)
-    : _base(base), _irq(irq), _txPin(txPin), _txFn(txFn), _rxPin(rxPin), _rxFn(rxFn) {}
+  HardwareSerialCM(uintptr_t base, int irq, uint8_t txPin, uint8_t txFn, uint8_t rxPin, uint8_t rxFn,
+                   void (*isr)(void) = nullptr)
+    : _base(base), _irq(irq), _isr(isr), _txPin(txPin), _txFn(txFn), _rxPin(rxPin), _rxFn(rxFn) {}
 
   void begin(unsigned long baud) override { begin(baud, SERIAL_8N1); }
   void begin(unsigned long baud, uint16_t config) override;
@@ -70,6 +71,7 @@ private:
 
   uintptr_t _base;
   int _irq;
+  void (*_isr)(void);          /* manejador (familias con INTC: HC32, SWM181) */
   uint8_t _txPin, _txFn, _rxPin, _rxFn;
   bool _begun = false;
 
@@ -79,8 +81,9 @@ private:
   uint8_t _txBuf[SERIAL_TX_BUFFER_SIZE];
 };
 
-#define CM_SERIAL(name, periph, irqn, handler, tx, txfn, rx, rxfn)            \
-  HardwareSerialCM name((uintptr_t)(periph), (int)(irqn), tx, txfn, rx, rxfn); \
+#define CM_SERIAL(name, periph, irqn, handler, tx, txfn, rx, rxfn)                     \
+  extern "C" void handler(void);                                                       \
+  HardwareSerialCM name((uintptr_t)(periph), (int)(irqn), tx, txfn, rx, rxfn, handler); \
   extern "C" void handler(void) { name.irqHandler(); }
 
 #endif /* __cplusplus */

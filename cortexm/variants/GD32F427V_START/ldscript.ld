@@ -7,4 +7,5 @@ MEMORY
 }
 _Min_Heap_Size  = 0x400;
 _Min_Stack_Size = 0x800;
+REGION_ALIAS("VECTORS", FLASH);
 INCLUDE cortexm_sections.ld
