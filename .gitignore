@@ -1,3 +1,4 @@
 cortexm/platform.local.txt
 *.zip
 __pycache__/
+dist/

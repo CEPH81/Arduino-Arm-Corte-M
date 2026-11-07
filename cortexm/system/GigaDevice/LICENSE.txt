@@ -1,0 +1,4 @@
+Los archivos de GigaDevice (gd32f4xx*.h, system_gd32f4xx.c) son
+Copyright (c) 2020, GigaDevice Semiconductor Inc. y se distribuyen bajo la
+licencia BSD de 3 cláusulas incluida en el encabezado de cada archivo.
+Origen: GD32F4xx Firmware Library, vía github.com/CommunityGD32Cores/gd32-pio-spl-package

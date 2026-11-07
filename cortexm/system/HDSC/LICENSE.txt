@@ -1,0 +1,4 @@
+Los archivos de HDSC (hc32f460*.h/.c, hc32_common.h, system_hc32f460.*) son
+Copyright (C) 2020, Huada Semiconductor Co., Ltd. y se distribuyen bajo la
+licencia BSD de 3 cláusulas (opensource.org/licenses/BSD-3-Clause).
+Origen: HC32F460 DDL 2.2 sin modificar (copia en github.com/Klipper3d/klipper, lib/hc32f460).

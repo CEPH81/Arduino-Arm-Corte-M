@@ -76,10 +76,10 @@ upload.openocd_interface=interface/stlink.cfg
 upload.openocd_target=stm32f4x
 tools.openocd.upload.params.verbose=-d2
 tools.openocd.upload.params.quiet=-d0
-tools.openocd.upload.pattern="{path}/{cmd}" {upload.verbose} -s "{path}/openocd/scripts/" -f "{upload.openocd_interface}" -c "transport select swd" -f "target/{upload.openocd_target}.cfg" -c "program {{build.path}/{build.project_name}.elf} verify reset exit"
+tools.openocd.upload.pattern="{path}/{cmd}" {upload.verbose} -s "{path}/openocd/scripts/" -f "{upload.openocd_interface}" -f "target/{upload.openocd_target}.cfg" -c "program {{build.path}/{build.project_name}.elf} verify reset exit"
 tools.openocd.program.params.verbose=-d2
 tools.openocd.program.params.quiet=-d0
-tools.openocd.program.pattern="{path}/{cmd}" {program.verbose} -s "{path}/openocd/scripts/" -f "{upload.openocd_interface}" -c "transport select swd" -f "target/{upload.openocd_target}.cfg" -c "program {{build.path}/{build.project_name}.elf} verify reset exit"
+tools.openocd.program.pattern="{path}/{cmd}" {program.verbose} -s "{path}/openocd/scripts/" -f "{upload.openocd_interface}" -f "target/{upload.openocd_target}.cfg" -c "program {{build.path}/{build.project_name}.elf} verify reset exit"
 tools.openocd.erase.pattern=
 tools.openocd.bootloader.pattern=
 

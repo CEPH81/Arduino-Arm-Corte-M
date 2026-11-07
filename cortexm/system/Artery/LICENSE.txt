@@ -1,0 +1,4 @@
+Los archivos de Artery (at32f4*.h/.c, system_at32*.c) son Copyright (c) Artery
+Technology. Artery autoriza a usarlos, copiarlos y distribuirlos para el diseño
+y desarrollo con microcontroladores Artery (ver el aviso de cada archivo).
+Origen: github.com/ArteryTek/AT32F435_437_Firmware_Library y AT32F403A_407_Firmware_Library
