@@ -142,8 +142,8 @@
           },
           "url": "https://github.com/CEPH81/Arduino-Arm-Corte-M/releases/download/v0.3.0/cortexm-0.3.0.zip",
           "archiveFileName": "cortexm-0.3.0.zip",
-          "checksum": "SHA-256:e2076c6f28f5915260101996ace7644f3ef43a462481c5db2f7ebcdc08f6812a",
-          "size": "3905319",
+          "checksum": "SHA-256:7217c3baae1aa7231cf66fb15493e4d4d025ba0f60568d8da98ae74f8c22a166",
+          "size": "3876989",
           "boards": [
             {
               "name": "STM32F407VET6 Black (F4VE)"
