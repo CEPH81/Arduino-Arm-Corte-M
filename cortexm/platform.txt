@@ -1,0 +1,131 @@
+# Arduino-Arm-Cortex-M (CEPH81)
+# Núcleo Arduino para microcontroladores Arm Cortex-M de varios fabricantes.
+# https://arduino.github.io/arduino-cli/latest/platform-specification/
+
+name=Arm Cortex-M (CEPH81)
+version=0.1.0
+
+# ---------------------------------------------------------------------------
+# Compilador: arm-none-eabi-gcc que instala Arduino (paquete arduino).
+# Para usar otro (p.ej. xPack 13/14, más optimizador) crea platform.local.txt:
+#   compiler.path=C:/ruta/xpack-arm-none-eabi-gcc/bin/
+# ---------------------------------------------------------------------------
+compiler.path={runtime.tools.arm-none-eabi-gcc-7-2017q4.path}/bin/
+compiler.c.cmd=arm-none-eabi-gcc
+compiler.cpp.cmd=arm-none-eabi-g++
+compiler.S.cmd=arm-none-eabi-gcc
+compiler.ar.cmd=arm-none-eabi-gcc-ar
+compiler.c.elf.cmd=arm-none-eabi-g++
+compiler.objcopy.cmd=arm-none-eabi-objcopy
+compiler.size.cmd=arm-none-eabi-size
+
+compiler.warning_flags=-w
+compiler.warning_flags.none=-w
+compiler.warning_flags.default=
+compiler.warning_flags.more=-Wall
+compiler.warning_flags.all=-Wall -Wextra
+
+compiler.cmsis.flags="-I{runtime.platform.path}/system/CMSIS/Core/Include" "-I{runtime.platform.path}/system/{build.vendor_dir}/Include"
+compiler.api.flags="-I{build.core.path}/api/deprecated" "-I{build.core.path}/api/deprecated-avr-comp"
+compiler.defines=-DARDUINO={runtime.ide.version} -DARDUINO_{build.board} -DARDUINO_ARCH_{build.arch} {build.series_flags} -DHSE_VALUE={build.hse} {build.clock_flags} {build.extra_flags}
+
+compiler.common.flags={build.mcu} -mthumb {build.opt} {build.lto} -g3 -ffunction-sections -fdata-sections -fno-common --param max-inline-insns-single=500 -MMD
+compiler.c.flags=-c {compiler.common.flags} -std=gnu11 {compiler.warning_flags}
+compiler.cpp.flags=-c {compiler.common.flags} -std=gnu++17 -fno-exceptions -fno-rtti -fno-threadsafe-statics -fno-use-cxa-atexit {compiler.warning_flags}
+compiler.S.flags=-c {compiler.common.flags} -x assembler-with-cpp
+compiler.ar.flags=rcs
+compiler.c.elf.flags={build.mcu} -mthumb {build.opt} {build.lto} --specs=nano.specs -Wl,--gc-sections
+
+# Ganchos para platform.local.txt / opciones extra
+compiler.c.extra_flags=
+compiler.cpp.extra_flags=
+compiler.S.extra_flags=
+compiler.c.elf.extra_flags=
+build.extra_flags=
+build.clock_flags=
+build.lto=
+
+# ---------------------------------------------------------------------------
+# Recetas
+# ---------------------------------------------------------------------------
+recipe.c.o.pattern="{compiler.path}{compiler.c.cmd}" {compiler.c.flags} {compiler.defines} {compiler.cmsis.flags} {compiler.api.flags} {compiler.c.extra_flags} {includes} "{source_file}" -o "{object_file}"
+recipe.cpp.o.pattern="{compiler.path}{compiler.cpp.cmd}" {compiler.cpp.flags} {compiler.defines} {compiler.cmsis.flags} {compiler.api.flags} {compiler.cpp.extra_flags} {includes} "{source_file}" -o "{object_file}"
+recipe.S.o.pattern="{compiler.path}{compiler.S.cmd}" {compiler.S.flags} {compiler.defines} {compiler.cmsis.flags} {compiler.S.extra_flags} {includes} "{source_file}" -o "{object_file}"
+recipe.ar.pattern="{compiler.path}{compiler.ar.cmd}" {compiler.ar.flags} "{archive_file_path}" "{object_file}"
+
+recipe.c.combine.pattern="{compiler.path}{compiler.c.elf.cmd}" {compiler.c.elf.flags} {compiler.c.elf.extra_flags} "-T{build.variant.path}/{build.ldscript}" "-L{runtime.platform.path}/variants/common" "-Wl,-Map,{build.path}/{build.project_name}.map" -o "{build.path}/{build.project_name}.elf" -Wl,--start-group {object_files} "{archive_file_path}" -lc -lm -lgcc -lstdc++ -Wl,--end-group
+
+recipe.objcopy.hex.pattern="{compiler.path}{compiler.objcopy.cmd}" -O ihex "{build.path}/{build.project_name}.elf" "{build.path}/{build.project_name}.hex"
+recipe.objcopy.bin.pattern="{compiler.path}{compiler.objcopy.cmd}" -O binary "{build.path}/{build.project_name}.elf" "{build.path}/{build.project_name}.bin"
+
+recipe.output.tmp_file={build.project_name}.hex
+recipe.output.save_file={build.project_name}.{build.variant}.hex
+
+recipe.size.pattern="{compiler.path}{compiler.size.cmd}" -A "{build.path}/{build.project_name}.elf"
+recipe.size.regex=^(?:\.isr_vector|\.text|\.rodata|\.ARM|\.ARM\.extab|\.preinit_array|\.init_array|\.fini_array|\.data)\s+([0-9]+).*
+recipe.size.regex.data=^(?:\.data|\.bss|\._user_heap_stack)\s+([0-9]+).*
+
+# ---------------------------------------------------------------------------
+# Carga: ST-LINK (OpenOCD)
+# ---------------------------------------------------------------------------
+tools.openocd.path={runtime.tools.openocd-0.11.0-arduino2.path}
+tools.openocd.cmd=bin/openocd
+tools.openocd.cmd.windows=bin/openocd.exe
+tools.openocd.interface=interface/stlink.cfg
+tools.openocd.upload.params.verbose=-d2
+tools.openocd.upload.params.quiet=-d0
+tools.openocd.upload.pattern="{path}/{cmd}" {upload.verbose} -s "{path}/share/openocd/scripts/" -f "{interface}" -f "target/{upload.openocd_target}.cfg" -c "program {{build.path}/{build.project_name}.elf} verify reset exit"
+tools.openocd.program.params.verbose=-d2
+tools.openocd.program.params.quiet=-d0
+tools.openocd.program.pattern="{path}/{cmd}" {program.verbose} -s "{path}/share/openocd/scripts/" -f "{interface}" -f "target/{upload.openocd_target}.cfg" -c "program {{build.path}/{build.project_name}.elf} verify reset exit"
+tools.openocd.erase.pattern=
+tools.openocd.bootloader.pattern=
+
+# ---------------------------------------------------------------------------
+# Carga: SEGGER J-Link (J-Link Commander). Ruta en platform.local.txt si no
+# está en el lugar por defecto:  tools.jlink.jlinkexe.windows=D:/SEGGER/JLink/JLink.exe
+# ---------------------------------------------------------------------------
+tools.jlink.path={runtime.platform.path}/tools
+tools.jlink.cmd=jlink_upload.sh
+tools.jlink.cmd.windows=jlink_upload.bat
+tools.jlink.jlinkexe=JLinkExe
+tools.jlink.jlinkexe.windows=C:/Program Files/SEGGER/JLink/JLink.exe
+tools.jlink.speed=4000
+tools.jlink.upload.params.verbose=
+tools.jlink.upload.params.quiet=
+tools.jlink.upload.pattern="{path}/{cmd}" "{jlinkexe}" {upload.jlink_device} {speed} "{build.path}/{build.project_name}.hex"
+tools.jlink.program.params.verbose=
+tools.jlink.program.params.quiet=
+tools.jlink.program.pattern="{path}/{cmd}" "{jlinkexe}" {upload.jlink_device} {speed} "{build.path}/{build.project_name}.hex"
+tools.jlink.erase.pattern=
+tools.jlink.bootloader.pattern=
+
+# ---------------------------------------------------------------------------
+# Carga: STM32CubeProgrammer (ST-LINK por SWD; necesario para STM32H5)
+# ---------------------------------------------------------------------------
+tools.stm32cubeprog.path=/usr/local/STMicroelectronics/STM32Cube/STM32CubeProgrammer/bin
+tools.stm32cubeprog.path.windows=C:/Program Files/STMicroelectronics/STM32Cube/STM32CubeProgrammer/bin
+tools.stm32cubeprog.path.macosx=/Applications/STMicroelectronics/STM32Cube/STM32CubeProgrammer/STM32CubeProgrammer.app/Contents/MacOs/bin
+tools.stm32cubeprog.cmd=STM32_Programmer_CLI
+tools.stm32cubeprog.cmd.windows=STM32_Programmer_CLI.exe
+tools.stm32cubeprog.upload.params.verbose=-vb 3
+tools.stm32cubeprog.upload.params.quiet=-q
+tools.stm32cubeprog.upload.pattern="{path}/{cmd}" {upload.verbose} -c port=SWD mode=UR -d "{build.path}/{build.project_name}.elf" -v -rst
+tools.stm32cubeprog.program.params.verbose=-vb 3
+tools.stm32cubeprog.program.params.quiet=-q
+tools.stm32cubeprog.program.pattern="{path}/{cmd}" {program.verbose} -c port=SWD mode=UR -d "{build.path}/{build.project_name}.elf" -v -rst
+tools.stm32cubeprog.erase.pattern=
+tools.stm32cubeprog.bootloader.pattern=
+
+# ---------------------------------------------------------------------------
+# Depuración en Arduino IDE 2 (OpenOCD + ST-LINK)
+# ---------------------------------------------------------------------------
+debug.executable={build.path}/{build.project_name}.elf
+debug.toolchain=gcc
+debug.toolchain.path={compiler.path}
+debug.toolchain.prefix=arm-none-eabi-
+debug.server=openocd
+debug.server.openocd.path={runtime.tools.openocd-0.11.0-arduino2.path}/bin/openocd
+debug.server.openocd.scripts_dir={runtime.tools.openocd-0.11.0-arduino2.path}/share/openocd/scripts/
+debug.server.openocd.scripts.0=interface/stlink.cfg
+debug.server.openocd.scripts.1=target/{upload.openocd_target}.cfg

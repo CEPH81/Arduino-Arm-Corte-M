@@ -1,0 +1,15 @@
+# Programadores (Herramientas > Programador, luego "Subir usando programador")
+stlink.name=ST-LINK (OpenOCD)
+stlink.protocol=swd
+stlink.program.tool=openocd
+stlink.program.tool.default=openocd
+
+jlink.name=SEGGER J-Link
+jlink.protocol=swd
+jlink.program.tool=jlink
+jlink.program.tool.default=jlink
+
+cubeprog.name=ST-LINK (STM32CubeProgrammer)
+cubeprog.protocol=swd
+cubeprog.program.tool=stm32cubeprog
+cubeprog.program.tool.default=stm32cubeprog
