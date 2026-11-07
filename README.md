@@ -46,6 +46,8 @@ En las placas marcadas "verificar" dentro de su `variant.h` (LED, botón o pines
 
 Los objetivos de pyOCD de cada placa están en `upload.pyocd_target` de `boards.txt` (p.ej. `gd32f427vk`, `hc32f460xe`, `swm341xe`).
 
+**Synwit:** J-Link no trae de fábrica el SWM181 ni el SWM341. Hay que añadir el soporte que publica Synwit (entrada en `JLinkDevices.xml` y algoritmo de flash), o usar pyOCD con el `.pack` de Synwit (`pyocd load --pack <archivo.pack> ...`).
+
 ## Qué funciona
 
 | Función | Estado |
