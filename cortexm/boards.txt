@@ -16,7 +16,7 @@ f407ve_black.build.ldscript=ldscript.ld
 f407ve_black.build.mcu=-mcpu=cortex-m4 -mfloat-abi=hard -mfpu=fpv4-sp-d16
 f407ve_black.build.series_flags=-DSTM32F4xx -DSTM32F407xx
 f407ve_black.build.vendor_dir=ST/F4
-f407ve_black.build.hse_flags=-DHSE_VALUE=8000000
+f407ve_black.build.hse_flags=-DHSE_VALUE=8000000UL
 f407ve_black.upload.maximum_size=524288
 f407ve_black.upload.maximum_data_size=131072
 f407ve_black.upload.jlink_device=STM32F407VE
@@ -66,7 +66,7 @@ nucleo_l432kc.build.ldscript=ldscript.ld
 nucleo_l432kc.build.mcu=-mcpu=cortex-m4 -mfloat-abi=hard -mfpu=fpv4-sp-d16
 nucleo_l432kc.build.series_flags=-DSTM32L4xx -DSTM32L432xx
 nucleo_l432kc.build.vendor_dir=ST/L4
-nucleo_l432kc.build.hse_flags=-DHSE_VALUE=8000000
+nucleo_l432kc.build.hse_flags=-DHSE_VALUE=8000000UL
 nucleo_l432kc.upload.maximum_size=262144
 nucleo_l432kc.upload.maximum_data_size=65536
 nucleo_l432kc.upload.jlink_device=STM32L432KC
@@ -116,7 +116,7 @@ weact_g431.build.ldscript=ldscript.ld
 weact_g431.build.mcu=-mcpu=cortex-m4 -mfloat-abi=hard -mfpu=fpv4-sp-d16
 weact_g431.build.series_flags=-DSTM32G4xx -DSTM32G431xx
 weact_g431.build.vendor_dir=ST/G4
-weact_g431.build.hse_flags=-DHSE_VALUE=8000000
+weact_g431.build.hse_flags=-DHSE_VALUE=8000000UL
 weact_g431.upload.maximum_size=131072
 weact_g431.upload.maximum_data_size=22528
 weact_g431.upload.jlink_device=STM32G431CB
@@ -166,7 +166,7 @@ weact_wb55.build.ldscript=ldscript.ld
 weact_wb55.build.mcu=-mcpu=cortex-m4 -mfloat-abi=hard -mfpu=fpv4-sp-d16
 weact_wb55.build.series_flags=-DSTM32WBxx -DSTM32WB55xx
 weact_wb55.build.vendor_dir=ST/WB
-weact_wb55.build.hse_flags=-DHSE_VALUE=32000000
+weact_wb55.build.hse_flags=-DHSE_VALUE=32000000UL
 weact_wb55.upload.maximum_size=524288
 weact_wb55.upload.maximum_data_size=196608
 weact_wb55.upload.jlink_device=STM32WB55CG
@@ -216,7 +216,7 @@ generic_h503.build.ldscript=ldscript.ld
 generic_h503.build.mcu=-mcpu=cortex-m33 -mfloat-abi=hard -mfpu=fpv5-sp-d16
 generic_h503.build.series_flags=-DSTM32H5xx -DSTM32H503xx
 generic_h503.build.vendor_dir=ST/H5
-generic_h503.build.hse_flags=-DHSE_VALUE=25000000
+generic_h503.build.hse_flags=-DHSE_VALUE=25000000UL
 generic_h503.upload.maximum_size=131072
 generic_h503.upload.maximum_data_size=32768
 generic_h503.upload.jlink_device=STM32H503RB
@@ -257,7 +257,7 @@ gd32f427v_start.build.ldscript=ldscript.ld
 gd32f427v_start.build.mcu=-mcpu=cortex-m4 -mfloat-abi=hard -mfpu=fpv4-sp-d16
 gd32f427v_start.build.series_flags=-DGD32F4XX -DGD32F427
 gd32f427v_start.build.vendor_dir=GigaDevice/F4
-gd32f427v_start.build.hse_flags=-DHXTAL_VALUE=25000000
+gd32f427v_start.build.hse_flags=-DHXTAL_VALUE=25000000UL
 gd32f427v_start.upload.maximum_size=3145728
 gd32f427v_start.upload.maximum_data_size=196608
 gd32f427v_start.upload.jlink_device=GD32F427VK
@@ -308,7 +308,7 @@ weact_at32f403a.build.ldscript=ldscript.ld
 weact_at32f403a.build.mcu=-mcpu=cortex-m4 -mfloat-abi=hard -mfpu=fpv4-sp-d16
 weact_at32f403a.build.series_flags=-DAT32F403A_407 -DAT32F403ACGU7 -DUSE_STDPERIPH_DRIVER
 weact_at32f403a.build.vendor_dir=Artery/F403A
-weact_at32f403a.build.hse_flags=-DHEXT_VALUE=8000000
+weact_at32f403a.build.hse_flags=-DHEXT_VALUE=8000000UL
 weact_at32f403a.upload.maximum_size=1048576
 weact_at32f403a.upload.maximum_data_size=98304
 weact_at32f403a.upload.jlink_device=AT32F403ACGU7
@@ -346,7 +346,7 @@ atstart_f437.build.ldscript=ldscript.ld
 atstart_f437.build.mcu=-mcpu=cortex-m4 -mfloat-abi=hard -mfpu=fpv4-sp-d16
 atstart_f437.build.series_flags=-DAT32F435_437 -DAT32F437ZMT7 -DUSE_STDPERIPH_DRIVER
 atstart_f437.build.vendor_dir=Artery/F43x
-atstart_f437.build.hse_flags=-DHEXT_VALUE=8000000
+atstart_f437.build.hse_flags=-DHEXT_VALUE=8000000UL
 atstart_f437.upload.maximum_size=4128768
 atstart_f437.upload.maximum_data_size=393216
 atstart_f437.upload.jlink_device=AT32F437ZMT7
@@ -384,7 +384,7 @@ hc32f460jeta.build.ldscript=ldscript.ld
 hc32f460jeta.build.mcu=-mcpu=cortex-m4 -mfloat-abi=hard -mfpu=fpv4-sp-d16
 hc32f460jeta.build.series_flags=-DHC32F460
 hc32f460jeta.build.vendor_dir=HDSC/HC32F460
-hc32f460jeta.build.hse_flags=-DXTAL_VALUE=8000000
+hc32f460jeta.build.hse_flags=-DXTAL_VALUE=8000000UL
 hc32f460jeta.upload.maximum_size=524288
 hc32f460jeta.upload.maximum_data_size=192512
 hc32f460jeta.upload.jlink_device=HC32F460xE
@@ -411,3 +411,83 @@ hc32f460jeta.menu.lto.off=Desactivado
 hc32f460jeta.menu.lto.off.build.lto=
 hc32f460jeta.menu.lto.on=Activado (-flto)
 hc32f460jeta.menu.lto.on.build.lto=-flto
+
+# ------------------------------------------------------------
+# Synwit SWM181CBT6 (placa azul USB-C)
+swm181cb.name=Synwit SWM181CBT6 (placa azul USB-C)
+swm181cb.build.core=arduino
+swm181cb.build.board=SWM181CB_BLUE
+swm181cb.build.variant=SWM181CB_BLUE
+swm181cb.build.ldscript=ldscript.ld
+swm181cb.build.mcu=-mcpu=cortex-m0 -mfloat-abi=soft
+swm181cb.build.series_flags=-DCHIP_SWM181
+swm181cb.build.vendor_dir=Synwit/SWM181
+swm181cb.build.hse_flags=
+swm181cb.upload.maximum_size=65536
+swm181cb.upload.maximum_data_size=16384
+swm181cb.upload.jlink_device=SWM181xB
+swm181cb.upload.pyocd_target=swm181xb
+swm181cb.menu.clock.c48=48 MHz (RC interno)
+swm181cb.menu.clock.c48.build.clock_flags=-DSYS_CLK=2
+swm181cb.menu.clock.c24=24 MHz (RC interno)
+swm181cb.menu.clock.c24.build.clock_flags=-DSYS_CLK=0
+swm181cb.menu.clock.c12=12 MHz (RC interno)
+swm181cb.menu.clock.c12.build.clock_flags=-DSYS_CLK=3
+swm181cb.menu.upload_method.jlink=SEGGER J-Link
+swm181cb.menu.upload_method.jlink.upload.tool=jlink
+swm181cb.menu.upload_method.jlink.upload.tool.default=jlink
+swm181cb.menu.upload_method.pyocd=pyOCD (CMSIS-DAP, ST-LINK, J-Link; usa el pack del fabricante)
+swm181cb.menu.upload_method.pyocd.upload.tool=pyocd
+swm181cb.menu.upload_method.pyocd.upload.tool.default=pyocd
+swm181cb.menu.opt.os=Más pequeño (-Os) [por defecto]
+swm181cb.menu.opt.os.build.opt=-Os
+swm181cb.menu.opt.o2=Rápido (-O2)
+swm181cb.menu.opt.o2.build.opt=-O2
+swm181cb.menu.opt.o3=Más rápido (-O3)
+swm181cb.menu.opt.o3.build.opt=-O3
+swm181cb.menu.opt.og=Depuración (-Og)
+swm181cb.menu.opt.og.build.opt=-Og
+swm181cb.menu.lto.off=Desactivado
+swm181cb.menu.lto.off.build.lto=
+swm181cb.menu.lto.on=Activado (-flto)
+swm181cb.menu.lto.on.build.lto=-flto
+
+# ------------------------------------------------------------
+# Synwit SWM34SVET6 (SWM341)
+swm34svet6.name=Synwit SWM34SVET6 (SWM341)
+swm34svet6.build.core=arduino
+swm34svet6.build.board=SWM34SVET6_DEV
+swm34svet6.build.variant=SWM34SVET6_DEV
+swm34svet6.build.ldscript=ldscript.ld
+swm34svet6.build.mcu=-mcpu=cortex-m33 -mfloat-abi=hard -mfpu=fpv5-sp-d16
+swm34svet6.build.series_flags=-DCHIP_SWM341
+swm34svet6.build.vendor_dir=Synwit/SWM341
+swm34svet6.build.hse_flags=-D__HSE=12000000UL
+swm34svet6.upload.maximum_size=524288
+swm34svet6.upload.maximum_data_size=65536
+swm34svet6.upload.jlink_device=SWM341xE
+swm34svet6.upload.pyocd_target=swm341xe
+swm34svet6.menu.clock.pll=120 MHz (cristal 12 MHz + PLL)
+swm34svet6.menu.clock.pll.build.clock_flags=-DSYS_CLK=6
+swm34svet6.menu.clock.rc40=40 MHz (RC interno, sin cristal)
+swm34svet6.menu.clock.rc40.build.clock_flags=-DSYS_CLK=2
+swm34svet6.menu.clock.rc20=20 MHz (RC interno) - modo seguro
+swm34svet6.menu.clock.rc20.build.clock_flags=-DSYS_CLK=0
+swm34svet6.menu.upload_method.jlink=SEGGER J-Link
+swm34svet6.menu.upload_method.jlink.upload.tool=jlink
+swm34svet6.menu.upload_method.jlink.upload.tool.default=jlink
+swm34svet6.menu.upload_method.pyocd=pyOCD (CMSIS-DAP, ST-LINK, J-Link; usa el pack del fabricante)
+swm34svet6.menu.upload_method.pyocd.upload.tool=pyocd
+swm34svet6.menu.upload_method.pyocd.upload.tool.default=pyocd
+swm34svet6.menu.opt.os=Más pequeño (-Os) [por defecto]
+swm34svet6.menu.opt.os.build.opt=-Os
+swm34svet6.menu.opt.o2=Rápido (-O2)
+swm34svet6.menu.opt.o2.build.opt=-O2
+swm34svet6.menu.opt.o3=Más rápido (-O3)
+swm34svet6.menu.opt.o3.build.opt=-O3
+swm34svet6.menu.opt.og=Depuración (-Og)
+swm34svet6.menu.opt.og.build.opt=-Og
+swm34svet6.menu.lto.off=Desactivado
+swm34svet6.menu.lto.off.build.lto=
+swm34svet6.menu.lto.on=Activado (-flto)
+swm34svet6.menu.lto.on.build.lto=-flto

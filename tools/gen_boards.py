@@ -92,6 +92,23 @@ BOARDS = [
          clocks=[("fast", "200 MHz (XTAL 8 MHz + MPLL)", ""),
                  ("safe", "8 MHz (MRC) - modo seguro", "-DCM_CLOCK_SAFE")],
          upload=["jlink", "pyocd"]),
+    # ---------------------------------------------------------- Synwit
+    dict(id="swm181cb", name="Synwit SWM181CBT6 (placa azul USB-C)", variant="SWM181CB_BLUE",
+         mcu=M0, flags="-DCHIP_SWM181", vendor="Synwit/SWM181",
+         hse=None, flash=64 * 1024, ram=16 * 1024,
+         jlink="SWM181xB", openocd=None, pyocd="swm181xb",
+         clocks=[("c48", "48 MHz (RC interno)", "-DSYS_CLK=2"),
+                 ("c24", "24 MHz (RC interno)", "-DSYS_CLK=0"),
+                 ("c12", "12 MHz (RC interno)", "-DSYS_CLK=3")],
+         upload=["jlink", "pyocd"]),
+    dict(id="swm34svet6", name="Synwit SWM34SVET6 (SWM341)", variant="SWM34SVET6_DEV",
+         mcu=M33F, flags="-DCHIP_SWM341", vendor="Synwit/SWM341",
+         hse=("__HSE", 12000000), flash=512 * 1024, ram=64 * 1024,
+         jlink="SWM341xE", openocd=None, pyocd="swm341xe",
+         clocks=[("pll", "120 MHz (cristal 12 MHz + PLL)", "-DSYS_CLK=6"),
+                 ("rc40", "40 MHz (RC interno, sin cristal)", "-DSYS_CLK=2"),
+                 ("rc20", "20 MHz (RC interno) - modo seguro", "-DSYS_CLK=0")],
+         upload=["jlink", "pyocd"]),
 ]
 
 COMMON_MENUS = [
@@ -124,7 +141,7 @@ def gen():
         p("build.mcu", b["mcu"])
         p("build.series_flags", b["flags"])
         p("build.vendor_dir", b["vendor"])
-        p("build.hse_flags", "-D%s=%d" % b["hse"] if b.get("hse") else "")
+        p("build.hse_flags", ("-D%s=%dUL" % b["hse"]) if b.get("hse") else "")
         p("upload.maximum_size", b["flash"])
         p("upload.maximum_data_size", b["ram"])
         p("upload.jlink_device", b["jlink"])

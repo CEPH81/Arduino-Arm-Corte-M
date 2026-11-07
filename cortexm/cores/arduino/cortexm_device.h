@@ -84,12 +84,24 @@
 /* ------------------------------ Synwit ------------------------------ */
 #elif defined(CHIP_SWM181)
   #define CM_VENDOR_SWM 1
+  #ifdef __cplusplus
+  extern "C" {                      /* los headers de Synwit no traen extern "C" */
+  #endif
   #include "SWM181.h"
+  #ifdef __cplusplus
+  }
+  #endif
   #define CM_GPIO_STYLE   4
   #define CM_USART_STYLE  4
 #elif defined(CHIP_SWM341)
   #define CM_VENDOR_SWM 1
+  #ifdef __cplusplus
+  extern "C" {
+  #endif
   #include "SWM341.h"
+  #ifdef __cplusplus
+  }
+  #endif
   #define CM_GPIO_STYLE   4
   #define CM_USART_STYLE  4
 
