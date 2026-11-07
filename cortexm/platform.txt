@@ -3,7 +3,7 @@
 # https://arduino.github.io/arduino-cli/latest/platform-specification/
 
 name=Arduino Arm Cortex-M (CEPH81)
-version=0.3.0
+version=0.4.0
 
 # ---------------------------------------------------------------------------
 # Compilador: xPack GNU Arm Embedded GCC 14 (lo instala el Gestor de placas).
@@ -54,7 +54,10 @@ recipe.cpp.o.pattern="{compiler.path}{compiler.cpp.cmd}" {compiler.cpp.flags} {c
 recipe.S.o.pattern="{compiler.path}{compiler.S.cmd}" {compiler.S.flags} {compiler.defines} {compiler.cmsis.flags} {compiler.S.extra_flags} {includes} "{source_file}" -o "{object_file}"
 recipe.ar.pattern="{compiler.path}{compiler.ar.cmd}" {compiler.ar.flags} "{archive_file_path}" "{object_file}"
 
-recipe.c.combine.pattern="{compiler.path}{compiler.c.elf.cmd}" {compiler.c.elf.flags} {compiler.c.elf.extra_flags} "-T{build.variant.path}/{build.ldscript}" "-L{runtime.platform.path}/variants/common" "-Wl,-Map,{build.path}/{build.project_name}.map" -o "{build.path}/{build.project_name}.elf" -Wl,--start-group {object_files} "{archive_file_path}" -lc -lm -lgcc -lstdc++ -Wl,--end-group
+# libc_nano y libm van dentro del grupo con -Wl,: si no, gcc los saca del
+# grupo (nano.specs) y las llamadas al sistema de core.a (_write para
+# printf, _sbrk para malloc...) no se encuentran.
+recipe.c.combine.pattern="{compiler.path}{compiler.c.elf.cmd}" {compiler.c.elf.flags} {compiler.c.elf.extra_flags} "-T{build.variant.path}/{build.ldscript}" "-L{runtime.platform.path}/variants/common" "-Wl,-Map,{build.path}/{build.project_name}.map" -o "{build.path}/{build.project_name}.elf" -Wl,--start-group {object_files} "{archive_file_path}" -Wl,-lc_nano -Wl,-lm -lgcc -lstdc++ -Wl,--end-group
 
 recipe.objcopy.hex.pattern="{compiler.path}{compiler.objcopy.cmd}" -O ihex "{build.path}/{build.project_name}.elf" "{build.path}/{build.project_name}.hex"
 recipe.objcopy.bin.pattern="{compiler.path}{compiler.objcopy.cmd}" -O binary "{build.path}/{build.project_name}.elf" "{build.path}/{build.project_name}.bin"

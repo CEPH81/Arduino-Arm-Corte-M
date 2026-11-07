@@ -38,6 +38,23 @@
 #define A6  PA7
 #define A7  PA2   /* compartido con TX del ST-LINK (SB2) */
 
+/* ---- Periféricos (ejemplos y bibliotecas) ---------------------------- */
+#define PIN_PWM1           PA8      /* PWM por hardware (LED RGB, Fade) */
+#define PIN_PWM2           PA9
+#define PIN_PWM3           PA10
+#define PIN_TONE           PA11      /* tone(): zumbador pasivo */
+#define PIN_SPI_SCK        PB3
+#define PIN_SPI_MISO       PB4
+#define PIN_SPI_MOSI       PB5
+#define PIN_SPI_SS         PA11
+#define CM_SPI_HW          SPI1_BASE   /* SPI por hardware */
+#define CM_SPI_AF          5
+#define PIN_WIRE_SDA       PB7      /* I2C por software (cualquier pin) */
+#define PIN_WIRE_SCL       PB6
+#define CM_EEPROM_ADDR     0x0803F800UL   /* página reservada en ldscript.ld */
+#define CM_EEPROM_PAGE     0x800UL
+#define CM_FLASH_UNIT      8
+
 #ifdef __cplusplus
 extern HardwareSerialCM Serial;
 #endif

@@ -1,7 +1,7 @@
 /* WeAct STM32G431CBU6 */
 MEMORY
 {
-  FLASH (rx)  : ORIGIN = 0x08000000, LENGTH = 128K
+  FLASH (rx)  : ORIGIN = 0x08000000, LENGTH = 126K   /* el resto: EEPROM emulada */
   RAM   (xrw) : ORIGIN = 0x20000000, LENGTH = 22K
 }
 _Min_Heap_Size  = 0x400;

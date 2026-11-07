@@ -10,10 +10,10 @@
 
 #if defined(CHIP_SWM341)
 GPIO_TypeDef *const cm_swm_gpio[] = { GPIOA, GPIOB, GPIOC, GPIOD, GPIOE, GPIOM, GPION };
-static PORT_TypeDef *const swm_port[] = { PORTA, PORTB, PORTC, PORTD, PORTE, PORTM, PORTN };
+PORT_TypeDef *const cm_swm_port_tbl[] = { PORTA, PORTB, PORTC, PORTD, PORTE, PORTM, PORTN };
 #else
 GPIO_TypeDef *const cm_swm_gpio[] = { GPIOA, GPIOB, GPIOC, GPIOD, GPIOE };
-static PORT_TypeDef *const swm_port[] = { PORTA, PORTB, PORTC, PORTD, PORTE };
+PORT_TypeDef *const cm_swm_port_tbl[] = { PORTA, PORTB, PORTC, PORTD, PORTE };
 #endif
 
 /* GPIO_Init() ya habilita el reloj del puerto */
@@ -43,7 +43,7 @@ void pinMode(pin_size_t pin, PinMode mode)
 void cmPinFunction(uint8_t pin, uint8_t fn, bool openDrain, uint8_t pull)
 {
   if (!cmPinValid(pin)) return;
-  PORT_TypeDef *p = swm_port[cmPinPortIndex(pin)];
+  PORT_TypeDef *p = cm_swm_port_tbl[cmPinPortIndex(pin)];
   uint32_t bit = cmPinMask(pin);
   uint32_t m = cmIrqSave();
   PORT_Init(p, cmPinBit(pin), fn, 1);
@@ -57,7 +57,7 @@ void cmPinAnalog(uint8_t pin)
 {
   if (!cmPinValid(pin)) return;
   /* Función analógica: la elige el driver del ADC; aquí se apaga la entrada digital */
-  PORT_Init(swm_port[cmPinPortIndex(pin)], cmPinBit(pin), 0, 0);
+  PORT_Init(cm_swm_port_tbl[cmPinPortIndex(pin)], cmPinBit(pin), 0, 0);
 }
 
 void digitalWrite(pin_size_t pin, PinStatus val)

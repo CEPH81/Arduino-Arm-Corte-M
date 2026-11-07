@@ -18,6 +18,24 @@
 #define PIN_SERIAL_RX      PA0
 #define PIN_SERIAL_TX      PA1
 
+/* ---- Periféricos (ejemplos y bibliotecas) ---------------------------- */
+#define A0  PA12
+#define A1  PA15
+#define A2  PC6
+#define A3  PC7
+#define PIN_PWM1           PB9      /* PWM por hardware (LED RGB, Fade) */
+#define PIN_PWM2           PB8
+#define PIN_PWM3           PB10
+#define PIN_TONE           PB11      /* tone(): zumbador pasivo */
+#define PIN_SPI_SCK        PB4
+#define PIN_SPI_MISO       PB5
+#define PIN_SPI_MOSI       PB6
+#define PIN_SPI_SS         PB7
+/* sin CM_SPI_HW: SPI por software en estos pines */
+#define PIN_WIRE_SDA       PB2      /* I2C por software (cualquier pin) */
+#define PIN_WIRE_SCL       PB3
+/* sin CM_EEPROM_ADDR: la EEPROM emulada no está disponible */
+
 #ifdef __cplusplus
 extern HardwareSerialCM Serial;
 #endif

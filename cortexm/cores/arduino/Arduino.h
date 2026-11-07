@@ -29,6 +29,14 @@ extern "C" {
 
 void cmTimeInit(void);
 
+/* Extensiones de analog*: wiring_analog.cpp */
+#define AR_DEFAULT  0
+void     analogReadResolution(int bits);
+void     analogWriteResolution(int bits);
+void     analogWriteFrequency(uint32_t hz);
+uint32_t analogReadMillivolts(pin_size_t pin);
+int32_t  analogReadTemperature(void);       /* centésimas de °C; CM_TEMP_NONE si no hay */
+
 #ifdef __cplusplus
 } /* extern "C" */
 

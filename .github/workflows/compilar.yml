@@ -45,7 +45,9 @@ jobs:
 
       - name: Compilar ejemplos
         run: |
-          for ej in cortexm/libraries/CortexM/examples/*/; do
+          for ej in cortexm/libraries/*/examples/*/; do
+            # el SWM181 no tiene EEPROM emulada
+            if [ "${{ matrix.placa }}" = swm181cb ] && [[ "$ej" == */EEPROM/* ]]; then continue; fi
             echo "::group::${{ matrix.placa }} - $(basename $ej)"
             arduino-cli compile --fqbn CEPH81:cortexm:${{ matrix.placa }} --warnings default "$ej"
             echo "::endgroup::"

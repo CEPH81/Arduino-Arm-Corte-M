@@ -5,7 +5,7 @@ MEMORY
 {
   VECT  (rx)  : ORIGIN = 0x00000000, LENGTH = 0x400
   ICG   (rx)  : ORIGIN = 0x00000400, LENGTH = 0x20
-  FLASH (rx)  : ORIGIN = 0x00000420, LENGTH = 512K - 0x420
+  FLASH (rx)  : ORIGIN = 0x00000420, LENGTH = 512K - 0x420 - 8K   /* el resto: EEPROM emulada */
   RAM   (xrw) : ORIGIN = 0x1FFF8000, LENGTH = 188K
 }
 _Min_Heap_Size  = 0x400;

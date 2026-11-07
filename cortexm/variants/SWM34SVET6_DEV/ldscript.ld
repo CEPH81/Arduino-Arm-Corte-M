@@ -1,7 +1,7 @@
 /* SWM341xE: 512 KB flash en 0x00000000, 64 KB SRAM */
 MEMORY
 {
-  FLASH (rx)  : ORIGIN = 0x00000000, LENGTH = 512K
+  FLASH (rx)  : ORIGIN = 0x00000000, LENGTH = 508K   /* el resto: EEPROM emulada */
   RAM   (xrw) : ORIGIN = 0x20000000, LENGTH = 64K
 }
 _Min_Heap_Size  = 0x400;

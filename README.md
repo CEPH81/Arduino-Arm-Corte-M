@@ -63,9 +63,49 @@ Los objetivos de pyOCD de cada placa están en `upload.pyocd_target` de `boards.
 | `shiftIn/Out`, `pulseIn`, `String`, `Print`, `Stream` (ArduinoCore-API) | ✓ todas |
 | Reloj máximo + modo seguro (oscilador interno) desde el menú | ✓ todas |
 | Si el cristal no arranca, se sigue con el oscilador interno | ✓ STM32F407, GD32, AT32, HC32 |
-| `analogRead`, `analogWrite` (PWM), `Wire`, `SPI`, USB | siguiente fase |
+| `analogRead` (12 bits), `analogReadMillivolts`, `analogReadResolution` | ✓ todas |
+| `analogWrite` (PWM por hardware), `analogWriteResolution` (1–16 bits), `analogWriteFrequency` | ✓ todas |
+| `tone` / `noTone` (cualquier pin) | ✓ todas |
+| `printf` por `Serial` | ✓ todas |
+| Temporizador periódico `cmTimerStart(us, función)` | ✓ todas |
+| `analogReadTemperature` (sensor interno) | ✓ STM32, GD32, AT32 |
+| `SPI` | ✓ todas (hardware o software, ver tabla) |
+| `Wire` (I2C maestro por software, cualquier pin) | ✓ todas |
+| `EEPROM` (1 KB emulada en flash) | ✓ todas menos SWM181 |
+| USB nativo (`SerialUSB`) | siguiente fase |
+
+### Pines de periféricos por placa
+
+Los nombres de abajo están en el `variant.h` de cada placa; los ejemplos los usan para funcionar en todas sin cambios.
+
+| Placa | A0… | PWM1 / PWM2 / PWM3 · TONE | SPI (SCK MISO MOSI SS) | I2C (SDA SCL) | EEPROM |
+|---|---|---|---|---|---|
+| F407VE Black | PA1 PA2 PA3 PA4 PA5 PB1 | PC6 PC7 PC8 · PC9 | hw SPI1: PB3 PB4 PB5 PB0 | PB9 PB8 | sector 7 (128 KB) |
+| Nucleo L432KC | A0–A7 del Nucleo | PA8 PA9 PA10 · PA11 | hw SPI1: PB3 PB4 PB5 PA11 | PB7 PB6 | 2 KB |
+| WeAct G431 | PA0 PA1 PA2 PA3 PB0 PB1 | PB4 PB5 PB6 · PB10 | hw SPI1: PA5 PA6 PA7 PA4 | PB7 PA15 | 2 KB |
+| WeAct WB55 | PA0 PA1 PA2 PA3 | PA8 PA15 PB3 · PB4 | hw SPI1: PA5 PA6 PA7 PA4 | PB9 PB8 | 4 KB |
+| STM32H503 | PA0 PA1 PA3 PB0 PC1 PC0 | PC6 PC7 PC8 · PB10 | sw: PA5 PA6 PA7 PA4 | PB7 PB6 | 8 KB |
+| GD32F427V-START | PA1 PA2 PA3 PC0 PC1 PC2 | PC7 PC8 PC9 · PB10 | hw SPI0: PA5 PA6 PA7 PA4 | PB7 PB6 | sector 27 (256 KB) |
+| WeAct AT32F403A | PA1 PA2 PA3 PB0 | PB8 PB9 PA8 · PB1 | hw SPI1: PA5 PA6 PA7 PA4 | PB7 PB6 | 2 KB |
+| AT-START-F437 | PA0 PA1 PA4 PB0 PC1 PC0 | PC6 PC7 PC8 · PB10 | hw SPI1: PA5 PA6 PA7 PA4 | PB9 PB8 | 4 KB |
+| HC32F460JETA | PA1 PA2 PA3 PB0 PB1 PC0 | PB13 PB14 PB15 · PA8 | sw: PA5 PA6 PA7 PA4 | PB7 PB6 | 8 KB |
+| SWM181CBT6 | PA12 PA15 PC6 PC7 | PB9 PB8 PB10 · PB11 | sw: PB4 PB5 PB6 PB7 | PB2 PB3 | — |
+| SWM34SVET6 | PC6 PC5 PC4 PC1 PC0 PA15 | PB3 PB1 PB15 · PD9 | sw: PB4 PB5 PB6 PB7 | PA0 PA1 | 4 KB |
+| CORE-Air105 | PC0 PC1 PC4 PC5 | PB0 PB1 PC6 · PC7 | sw: PB2 PB5 PB4 PB3 | PE7 PE6 | 4 KB (QSPI) |
+
+- **PWM:** los pines de un mismo temporizador comparten la frecuencia. Lista completa de pines con PWM y ADC: `hal/pins_st.h` (ST, GD32, AT32) y `hal/analog_*.c`.
+- **ADC:** tope = VDDA (3.3 V); en el Air105 el divisor interno da 0–3.76 V.
+- **EEPROM:** la página reservada ya no cuenta como espacio del programa. Cada byte que cambia se añade como registro y la página solo se borra cuando se llena (en STM32F4/GD32F4 el borrado de un sector grande para la CPU ~1–2 s).
+- **Temporizador libre** (`cmTimerStart`, y `tone()` en pines sin PWM): TIM6 (TIM17 en WB55), TIMER5 en GD32, TMR6 en AT32, Timer A4 en HC32, TIMR0 en Synwit, TIM6 en Air105.
 
 Menús: *Reloj de CPU*, *Método de carga*, *Optimización* (-Os, -O2, -O3, -Og) y *LTO*.
+
+## Ejemplos
+
+**Archivo › Ejemplos › CortexM** (todas las placas, sin cambiar pines):
+01 Parpadeo · 02 EcoSerial · 03 AnalogRead · 04 FadeLED · 05 Interrupcion · 06 Tono · 07 Printf · 08 PotenciometroADC · 09 Boton · 10 HolaSerial · 11 EcoLineas · 12 PWM_Resolucion · 13 Temporizador · 14 MedirPulsos · 15 EscanerI2C · 16 RGB_Potenciometro · 17 TemperaturaInterna · 18 AhorroMemoria · 19 VelocidadGPIO
+
+**Bibliotecas incluidas**, cada una con su ejemplo: `SPI` (SPI_Loopback), `Wire` (I2C_Scanner), `EEPROM` (EEPROM_Contador), `OLED_SSD1306` (OLED_Hola), `LCD_HD44780` (LCD_PCF8574, LCD_HC164), `NTC_Thermistor` (NTC_OLED), `HCSR04` (HCSR04_OLED), `CM_Log` (LogDemo).
 
 ## Cómo está organizado
 
@@ -80,6 +120,7 @@ cortexm/
   variants/<PLACA>/       pines, reloj, linker script y system_*.c del fabricante
   system/<Fabricante>/    headers CMSIS y drivers oficiales usados
   libraries/CortexM/      ejemplos (Archivo › Ejemplos › CortexM)
+  libraries/<otras>/      SPI, Wire, EEPROM, OLED_SSD1306, LCD_HD44780, NTC_Thermistor, HCSR04, CM_Log
 tools/                    generadores y script de publicación
 ```
 

@@ -17,7 +17,7 @@ f407ve_black.build.mcu=-mcpu=cortex-m4 -mfloat-abi=hard -mfpu=fpv4-sp-d16
 f407ve_black.build.series_flags=-DSTM32F4xx -DSTM32F407xx
 f407ve_black.build.vendor_dir=ST/F4
 f407ve_black.build.hse_flags=-DHSE_VALUE=8000000UL
-f407ve_black.upload.maximum_size=524288
+f407ve_black.upload.maximum_size=393216
 f407ve_black.upload.maximum_data_size=131072
 f407ve_black.upload.jlink_device=STM32F407VE
 f407ve_black.upload.openocd_target=stm32f4x
@@ -67,7 +67,7 @@ nucleo_l432kc.build.mcu=-mcpu=cortex-m4 -mfloat-abi=hard -mfpu=fpv4-sp-d16
 nucleo_l432kc.build.series_flags=-DSTM32L4xx -DSTM32L432xx
 nucleo_l432kc.build.vendor_dir=ST/L4
 nucleo_l432kc.build.hse_flags=-DHSE_VALUE=8000000UL
-nucleo_l432kc.upload.maximum_size=262144
+nucleo_l432kc.upload.maximum_size=260096
 nucleo_l432kc.upload.maximum_data_size=65536
 nucleo_l432kc.upload.jlink_device=STM32L432KC
 nucleo_l432kc.upload.openocd_target=stm32l4x
@@ -117,7 +117,7 @@ weact_g431.build.mcu=-mcpu=cortex-m4 -mfloat-abi=hard -mfpu=fpv4-sp-d16
 weact_g431.build.series_flags=-DSTM32G4xx -DSTM32G431xx
 weact_g431.build.vendor_dir=ST/G4
 weact_g431.build.hse_flags=-DHSE_VALUE=8000000UL
-weact_g431.upload.maximum_size=131072
+weact_g431.upload.maximum_size=129024
 weact_g431.upload.maximum_data_size=22528
 weact_g431.upload.jlink_device=STM32G431CB
 weact_g431.upload.openocd_target=stm32g4x
@@ -167,7 +167,7 @@ weact_wb55.build.mcu=-mcpu=cortex-m4 -mfloat-abi=hard -mfpu=fpv4-sp-d16
 weact_wb55.build.series_flags=-DSTM32WBxx -DSTM32WB55xx
 weact_wb55.build.vendor_dir=ST/WB
 weact_wb55.build.hse_flags=-DHSE_VALUE=32000000UL
-weact_wb55.upload.maximum_size=524288
+weact_wb55.upload.maximum_size=520192
 weact_wb55.upload.maximum_data_size=196608
 weact_wb55.upload.jlink_device=STM32WB55CG
 weact_wb55.upload.openocd_target=stm32wbx
@@ -217,7 +217,7 @@ generic_h503.build.mcu=-mcpu=cortex-m33 -mfloat-abi=hard -mfpu=fpv5-sp-d16
 generic_h503.build.series_flags=-DSTM32H5xx -DSTM32H503xx
 generic_h503.build.vendor_dir=ST/H5
 generic_h503.build.hse_flags=-DHSE_VALUE=25000000UL
-generic_h503.upload.maximum_size=131072
+generic_h503.upload.maximum_size=122880
 generic_h503.upload.maximum_data_size=32768
 generic_h503.upload.jlink_device=STM32H503RB
 generic_h503.upload.pyocd_target=stm32h503rbtx
@@ -258,7 +258,7 @@ gd32f427v_start.build.mcu=-mcpu=cortex-m4 -mfloat-abi=hard -mfpu=fpv4-sp-d16
 gd32f427v_start.build.series_flags=-DGD32F4XX -DGD32F427
 gd32f427v_start.build.vendor_dir=GigaDevice/F4
 gd32f427v_start.build.hse_flags=-DHXTAL_VALUE=25000000UL
-gd32f427v_start.upload.maximum_size=3145728
+gd32f427v_start.upload.maximum_size=2883584
 gd32f427v_start.upload.maximum_data_size=196608
 gd32f427v_start.upload.jlink_device=GD32F427VK
 gd32f427v_start.upload.openocd_target=stm32f4x
@@ -309,7 +309,7 @@ weact_at32f403a.build.mcu=-mcpu=cortex-m4 -mfloat-abi=hard -mfpu=fpv4-sp-d16
 weact_at32f403a.build.series_flags=-DAT32F403A_407 -DAT32F403ACGU7 -DUSE_STDPERIPH_DRIVER
 weact_at32f403a.build.vendor_dir=Artery/F403A
 weact_at32f403a.build.hse_flags=-DHEXT_VALUE=8000000UL
-weact_at32f403a.upload.maximum_size=1048576
+weact_at32f403a.upload.maximum_size=1046528
 weact_at32f403a.upload.maximum_data_size=98304
 weact_at32f403a.upload.jlink_device=AT32F403ACGU7
 weact_at32f403a.upload.pyocd_target=at32f403acgu7
@@ -347,7 +347,7 @@ atstart_f437.build.mcu=-mcpu=cortex-m4 -mfloat-abi=hard -mfpu=fpv4-sp-d16
 atstart_f437.build.series_flags=-DAT32F435_437 -DAT32F437ZMT7 -DUSE_STDPERIPH_DRIVER
 atstart_f437.build.vendor_dir=Artery/F43x
 atstart_f437.build.hse_flags=-DHEXT_VALUE=8000000UL
-atstart_f437.upload.maximum_size=4128768
+atstart_f437.upload.maximum_size=4124672
 atstart_f437.upload.maximum_data_size=393216
 atstart_f437.upload.jlink_device=AT32F437ZMT7
 atstart_f437.upload.pyocd_target=at32f437zmt7
@@ -385,7 +385,7 @@ hc32f460jeta.build.mcu=-mcpu=cortex-m4 -mfloat-abi=hard -mfpu=fpv4-sp-d16
 hc32f460jeta.build.series_flags=-DHC32F460
 hc32f460jeta.build.vendor_dir=HDSC/HC32F460
 hc32f460jeta.build.hse_flags=-DXTAL_VALUE=8000000UL
-hc32f460jeta.upload.maximum_size=524288
+hc32f460jeta.upload.maximum_size=515040
 hc32f460jeta.upload.maximum_data_size=192512
 hc32f460jeta.upload.jlink_device=HC32F460xE
 hc32f460jeta.upload.pyocd_target=hc32f460xe
@@ -463,7 +463,7 @@ swm34svet6.build.mcu=-mcpu=cortex-m33 -mfloat-abi=hard -mfpu=fpv5-sp-d16
 swm34svet6.build.series_flags=-DCHIP_SWM341
 swm34svet6.build.vendor_dir=Synwit/SWM341
 swm34svet6.build.hse_flags=-D__HSE=12000000UL
-swm34svet6.upload.maximum_size=524288
+swm34svet6.upload.maximum_size=520192
 swm34svet6.upload.maximum_data_size=65536
 swm34svet6.upload.jlink_device=SWM341xE
 swm34svet6.upload.pyocd_target=swm341xe
@@ -503,7 +503,7 @@ core_air105.build.mcu=-mcpu=cortex-m4 -mfloat-abi=hard -mfpu=fpv4-sp-d16
 core_air105.build.series_flags=-DAIR105
 core_air105.build.vendor_dir=MegaHunt/Air105
 core_air105.build.hse_flags=
-core_air105.upload.maximum_size=4190208
+core_air105.upload.maximum_size=4186112
 core_air105.upload.maximum_data_size=655360
 core_air105.monitor_port.serial.rts=off
 core_air105.menu.clock.c204=204 MHz (cristal 12 MHz + PLL)

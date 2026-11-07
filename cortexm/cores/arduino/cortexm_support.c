@@ -31,7 +31,7 @@ int  _fstat(int fd, struct stat *st)    { (void)fd; st->st_mode = S_IFCHR; retur
 int  _isatty(int fd)                    { (void)fd; return 1; }
 int  _lseek(int fd, int p, int d)       { (void)fd; (void)p; (void)d; return 0; }
 int  _read(int fd, char *b, int n)      { (void)fd; (void)b; (void)n; return 0; }
-int  _write(int fd, const char *b, int n){ (void)fd; (void)b; return n; }
+/* _write (printf -> Serial) está en cortexm_stdio.cpp */
 int  _getpid(void)                      { return 1; }
 int  _kill(int pid, int sig)            { (void)pid; (void)sig; errno = EINVAL; return -1; }
 void _exit(int code)                    { (void)code; for (;;) { __disable_irq(); } }

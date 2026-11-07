@@ -11,5 +11,7 @@
   #include "SWM341_port.c"
   #include "SWM341_gpio.c"
   #include "SWM341_uart.c"
+  #include "SWM341_adc.c"
+  #include "SWM341_pwm.c"
   #include "SWM341_flash.c"      /* Flash_Param_at_xMHz(), usado por SystemInit */
 #endif

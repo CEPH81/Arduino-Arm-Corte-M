@@ -14,6 +14,7 @@
 #include <stdbool.h>
 #include "cortexm_device.h"
 #include "hal/cm_gpio.h"
+#include "cortexm_periph.h"
 
 #ifdef __cplusplus
 extern "C" {

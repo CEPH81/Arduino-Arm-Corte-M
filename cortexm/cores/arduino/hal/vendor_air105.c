@@ -5,4 +5,6 @@
 #if defined(AIR105)
   #include "air105_sysctrl.c"
   #include "air105_uart.c"
+  #include "air105_qspi.c"
+  #include "air105_cache.c"
 #endif

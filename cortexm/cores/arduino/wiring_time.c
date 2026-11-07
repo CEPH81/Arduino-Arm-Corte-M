@@ -9,10 +9,13 @@
 
 volatile uint32_t cm_ms_ticks = 0;
 static uint32_t cm_cycles_per_us = 1;
+void (*volatile cm_tick_hook)(void) = 0;
 
 void SysTick_Handler(void)
 {
   cm_ms_ticks++;
+  void (*h)(void) = cm_tick_hook;
+  if (h) h();
 }
 
 void cmTimeInit(void)

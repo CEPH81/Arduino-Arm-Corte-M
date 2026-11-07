@@ -1,7 +1,7 @@
 /* Nucleo-32 L432KC */
 MEMORY
 {
-  FLASH (rx)  : ORIGIN = 0x08000000, LENGTH = 256K
+  FLASH (rx)  : ORIGIN = 0x08000000, LENGTH = 254K   /* el resto: EEPROM emulada */
   RAM   (xrw) : ORIGIN = 0x20000000, LENGTH = 64K
 }
 _Min_Heap_Size  = 0x400;
