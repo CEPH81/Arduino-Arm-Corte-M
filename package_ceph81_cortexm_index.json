@@ -131,6 +131,69 @@
               "version": "0.12.0-6"
             }
           ]
+        },
+        {
+          "name": "Arduino Arm Cortex-M (CEPH81)",
+          "architecture": "cortexm",
+          "version": "0.4.0",
+          "category": "Contributed",
+          "help": {
+            "online": "https://github.com/CEPH81/Arduino-Arm-Corte-M"
+          },
+          "url": "https://github.com/CEPH81/Arduino-Arm-Corte-M/releases/download/v0.4.0/cortexm-0.4.0.zip",
+          "archiveFileName": "cortexm-0.4.0.zip",
+          "checksum": "SHA-256:64e58cc745f7b208fbf12fd80fd62d37c37b5c2740feac4fc804617d7e055f89",
+          "size": "3981765",
+          "boards": [
+            {
+              "name": "STM32F407VET6 Black (F4VE)"
+            },
+            {
+              "name": "Nucleo-32 STM32L432KC"
+            },
+            {
+              "name": "WeAct STM32G431CBU6"
+            },
+            {
+              "name": "WeAct STM32WB55CGU6"
+            },
+            {
+              "name": "STM32H503 (genérica)"
+            },
+            {
+              "name": "GD32F427V-START"
+            },
+            {
+              "name": "WeAct AT32F403ACGU7"
+            },
+            {
+              "name": "AT-START-F437 (AT32F437ZMT7)"
+            },
+            {
+              "name": "HC32F460JETA (placa de desarrollo)"
+            },
+            {
+              "name": "Synwit SWM181CBT6 (placa azul USB-C)"
+            },
+            {
+              "name": "Synwit SWM34SVET6 (SWM341)"
+            },
+            {
+              "name": "CORE-Air105 (Hezhou / LuatOS)"
+            }
+          ],
+          "toolsDependencies": [
+            {
+              "packager": "CEPH81",
+              "name": "xpack-arm-none-eabi-gcc",
+              "version": "14.2.1-1.1"
+            },
+            {
+              "packager": "CEPH81",
+              "name": "xpack-openocd",
+              "version": "0.12.0-6"
+            }
+          ]
         }
       ],
       "tools": [
