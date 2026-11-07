@@ -2,15 +2,15 @@
 # Núcleo Arduino para microcontroladores Arm Cortex-M de varios fabricantes.
 # https://arduino.github.io/arduino-cli/latest/platform-specification/
 
-name=Arm Cortex-M (CEPH81)
-version=0.1.0
+name=Arduino Arm Cortex-M (CEPH81)
+version=0.2.0
 
 # ---------------------------------------------------------------------------
-# Compilador: arm-none-eabi-gcc que instala Arduino (paquete arduino).
-# Para usar otro (p.ej. xPack 13/14, más optimizador) crea platform.local.txt:
-#   compiler.path=C:/ruta/xpack-arm-none-eabi-gcc/bin/
+# Compilador: xPack GNU Arm Embedded GCC 14 (lo instala el Gestor de placas).
+# Para usar otro, crea platform.local.txt junto a este archivo con:
+#   compiler.path=C:/ruta/a/arm-none-eabi-gcc/bin/
 # ---------------------------------------------------------------------------
-compiler.path={runtime.tools.arm-none-eabi-gcc-7-2017q4.path}/bin/
+compiler.path={runtime.tools.xpack-arm-none-eabi-gcc.path}/bin/
 compiler.c.cmd=arm-none-eabi-gcc
 compiler.cpp.cmd=arm-none-eabi-g++
 compiler.S.cmd=arm-none-eabi-gcc
@@ -25,16 +25,16 @@ compiler.warning_flags.default=
 compiler.warning_flags.more=-Wall
 compiler.warning_flags.all=-Wall -Wextra
 
-compiler.cmsis.flags="-I{runtime.platform.path}/system/CMSIS/Core/Include" "-I{runtime.platform.path}/system/{build.vendor_dir}/Include"
+compiler.cmsis.flags="-I{runtime.platform.path}/system/CMSIS/Core/Include" "-I{runtime.platform.path}/system/{build.vendor_dir}/Include" "-I{runtime.platform.path}/system/{build.vendor_dir}/Driver"
 compiler.api.flags="-I{build.core.path}/api/deprecated" "-I{build.core.path}/api/deprecated-avr-comp"
-compiler.defines=-DARDUINO={runtime.ide.version} -DARDUINO_{build.board} -DARDUINO_ARCH_{build.arch} {build.series_flags} -DHSE_VALUE={build.hse} {build.clock_flags} {build.extra_flags}
+compiler.defines=-DARDUINO={runtime.ide.version} -DARDUINO_{build.board} -DARDUINO_ARCH_{build.arch} {build.series_flags} {build.hse_flags} {build.clock_flags} {build.extra_flags}
 
 compiler.common.flags={build.mcu} -mthumb {build.opt} {build.lto} -g3 -ffunction-sections -fdata-sections -fno-common --param max-inline-insns-single=500 -MMD
 compiler.c.flags=-c {compiler.common.flags} -std=gnu11 {compiler.warning_flags}
 compiler.cpp.flags=-c {compiler.common.flags} -std=gnu++17 -fno-exceptions -fno-rtti -fno-threadsafe-statics -fno-use-cxa-atexit {compiler.warning_flags}
 compiler.S.flags=-c {compiler.common.flags} -x assembler-with-cpp
 compiler.ar.flags=rcs
-compiler.c.elf.flags={build.mcu} -mthumb {build.opt} {build.lto} --specs=nano.specs -Wl,--gc-sections
+compiler.c.elf.flags={build.mcu} -mthumb {build.opt} {build.lto} --specs=nano.specs -Wl,--gc-sections -Wl,--no-warn-rwx-segments
 
 # Ganchos para platform.local.txt / opciones extra
 compiler.c.extra_flags=
@@ -43,6 +43,7 @@ compiler.S.extra_flags=
 compiler.c.elf.extra_flags=
 build.extra_flags=
 build.clock_flags=
+build.hse_flags=
 build.lto=
 
 # ---------------------------------------------------------------------------
@@ -66,24 +67,25 @@ recipe.size.regex=^(?:\.isr_vector|\.text|\.rodata|\.ARM|\.ARM\.extab|\.preinit_
 recipe.size.regex.data=^(?:\.data|\.bss|\._user_heap_stack)\s+([0-9]+).*
 
 # ---------------------------------------------------------------------------
-# Carga: ST-LINK (OpenOCD)
+# Carga: OpenOCD (ST-LINK o CMSIS-DAP según el menú "Método de carga")
 # ---------------------------------------------------------------------------
-tools.openocd.path={runtime.tools.openocd-0.11.0-arduino2.path}
+tools.openocd.path={runtime.tools.xpack-openocd.path}
 tools.openocd.cmd=bin/openocd
 tools.openocd.cmd.windows=bin/openocd.exe
-tools.openocd.interface=interface/stlink.cfg
+upload.openocd_interface=interface/stlink.cfg
+upload.openocd_target=stm32f4x
 tools.openocd.upload.params.verbose=-d2
 tools.openocd.upload.params.quiet=-d0
-tools.openocd.upload.pattern="{path}/{cmd}" {upload.verbose} -s "{path}/share/openocd/scripts/" -f "{interface}" -f "target/{upload.openocd_target}.cfg" -c "program {{build.path}/{build.project_name}.elf} verify reset exit"
+tools.openocd.upload.pattern="{path}/{cmd}" {upload.verbose} -s "{path}/openocd/scripts/" -f "{upload.openocd_interface}" -c "transport select swd" -f "target/{upload.openocd_target}.cfg" -c "program {{build.path}/{build.project_name}.elf} verify reset exit"
 tools.openocd.program.params.verbose=-d2
 tools.openocd.program.params.quiet=-d0
-tools.openocd.program.pattern="{path}/{cmd}" {program.verbose} -s "{path}/share/openocd/scripts/" -f "{interface}" -f "target/{upload.openocd_target}.cfg" -c "program {{build.path}/{build.project_name}.elf} verify reset exit"
+tools.openocd.program.pattern="{path}/{cmd}" {program.verbose} -s "{path}/openocd/scripts/" -f "{upload.openocd_interface}" -c "transport select swd" -f "target/{upload.openocd_target}.cfg" -c "program {{build.path}/{build.project_name}.elf} verify reset exit"
 tools.openocd.erase.pattern=
 tools.openocd.bootloader.pattern=
 
 # ---------------------------------------------------------------------------
-# Carga: SEGGER J-Link (J-Link Commander). Ruta en platform.local.txt si no
-# está en el lugar por defecto:  tools.jlink.jlinkexe.windows=D:/SEGGER/JLink/JLink.exe
+# Carga: SEGGER J-Link (J-Link Commander). Si no está en la ruta por defecto,
+# en platform.local.txt:  tools.jlink.jlinkexe.windows=D:/SEGGER/JLink/JLink.exe
 # ---------------------------------------------------------------------------
 tools.jlink.path={runtime.platform.path}/tools
 tools.jlink.cmd=jlink_upload.sh
@@ -99,6 +101,21 @@ tools.jlink.program.params.quiet=
 tools.jlink.program.pattern="{path}/{cmd}" "{jlinkexe}" {upload.jlink_device} {speed} "{build.path}/{build.project_name}.hex"
 tools.jlink.erase.pattern=
 tools.jlink.bootloader.pattern=
+
+# ---------------------------------------------------------------------------
+# Carga: pyOCD (pip install pyocd). Para chips que no son de ST hay que
+# instalar una vez el pack:  pyocd pack install <objetivo>
+# ---------------------------------------------------------------------------
+tools.pyocd.path=
+tools.pyocd.cmd=pyocd
+tools.pyocd.upload.params.verbose=-v
+tools.pyocd.upload.params.quiet=-q
+tools.pyocd.upload.pattern="{path}{cmd}" load {upload.verbose} -t {upload.pyocd_target} --format elf "{build.path}/{build.project_name}.elf"
+tools.pyocd.program.params.verbose=-v
+tools.pyocd.program.params.quiet=-q
+tools.pyocd.program.pattern="{path}{cmd}" load {program.verbose} -t {upload.pyocd_target} --format elf "{build.path}/{build.project_name}.elf"
+tools.pyocd.erase.pattern=
+tools.pyocd.bootloader.pattern=
 
 # ---------------------------------------------------------------------------
 # Carga: STM32CubeProgrammer (ST-LINK por SWD; necesario para STM32H5)
@@ -118,14 +135,14 @@ tools.stm32cubeprog.erase.pattern=
 tools.stm32cubeprog.bootloader.pattern=
 
 # ---------------------------------------------------------------------------
-# Depuración en Arduino IDE 2 (OpenOCD + ST-LINK)
+# Depuración en Arduino IDE 2 (OpenOCD con la interfaz del menú)
 # ---------------------------------------------------------------------------
 debug.executable={build.path}/{build.project_name}.elf
 debug.toolchain=gcc
 debug.toolchain.path={compiler.path}
 debug.toolchain.prefix=arm-none-eabi-
 debug.server=openocd
-debug.server.openocd.path={runtime.tools.openocd-0.11.0-arduino2.path}/bin/openocd
-debug.server.openocd.scripts_dir={runtime.tools.openocd-0.11.0-arduino2.path}/share/openocd/scripts/
-debug.server.openocd.scripts.0=interface/stlink.cfg
+debug.server.openocd.path={runtime.tools.xpack-openocd.path}/bin/openocd
+debug.server.openocd.scripts_dir={runtime.tools.xpack-openocd.path}/openocd/scripts/
+debug.server.openocd.scripts.0={upload.openocd_interface}
 debug.server.openocd.scripts.1=target/{upload.openocd_target}.cfg

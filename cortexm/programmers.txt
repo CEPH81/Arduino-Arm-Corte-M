@@ -1,13 +1,25 @@
 # Programadores (Herramientas > Programador, luego "Subir usando programador")
-stlink.name=ST-LINK (OpenOCD)
+stlink.name=ST-LINK V2/V3 (OpenOCD)
 stlink.protocol=swd
 stlink.program.tool=openocd
 stlink.program.tool.default=openocd
+stlink.upload.openocd_interface=interface/stlink.cfg
+
+daplink.name=CMSIS-DAP / DAPLink / WeAct Mini Debugger (OpenOCD)
+daplink.protocol=swd
+daplink.program.tool=openocd
+daplink.program.tool.default=openocd
+daplink.upload.openocd_interface=interface/cmsis-dap.cfg
 
 jlink.name=SEGGER J-Link
 jlink.protocol=swd
 jlink.program.tool=jlink
 jlink.program.tool.default=jlink
+
+pyocd.name=pyOCD (cualquier sonda)
+pyocd.protocol=swd
+pyocd.program.tool=pyocd
+pyocd.program.tool.default=pyocd
 
 cubeprog.name=ST-LINK (STM32CubeProgrammer)
 cubeprog.protocol=swd

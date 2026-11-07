@@ -1,11 +1,13 @@
 # Arduino-Arm-Cortex-M (CEPH81) - placas
+# ARCHIVO GENERADO por tools/gen_boards.py: editar allí, no aquí.
 
 menu.clock=Reloj de CPU
+menu.upload_method=Método de carga
 menu.opt=Optimización
 menu.lto=LTO (optimización al enlazar)
-menu.upload_method=Método de carga
 
-# ---------------- STM32F407VET6 Black (F4VE) ----------------
+# ------------------------------------------------------------
+# STM32F407VET6 Black (F4VE)
 f407ve_black.name=STM32F407VET6 Black (F4VE)
 f407ve_black.build.core=arduino
 f407ve_black.build.board=BLACK_F407VE
@@ -14,15 +16,33 @@ f407ve_black.build.ldscript=ldscript.ld
 f407ve_black.build.mcu=-mcpu=cortex-m4 -mfloat-abi=hard -mfpu=fpv4-sp-d16
 f407ve_black.build.series_flags=-DSTM32F4xx -DSTM32F407xx
 f407ve_black.build.vendor_dir=ST/F4
-f407ve_black.build.hse=8000000
+f407ve_black.build.hse_flags=-DHSE_VALUE=8000000
 f407ve_black.upload.maximum_size=524288
 f407ve_black.upload.maximum_data_size=131072
 f407ve_black.upload.jlink_device=STM32F407VE
 f407ve_black.upload.openocd_target=stm32f4x
+f407ve_black.upload.pyocd_target=stm32f407ve
 f407ve_black.menu.clock.fast=168 MHz (HSE 8 MHz + PLL)
 f407ve_black.menu.clock.fast.build.clock_flags=
 f407ve_black.menu.clock.safe=16 MHz (HSI) - modo seguro
 f407ve_black.menu.clock.safe.build.clock_flags=-DCM_CLOCK_SAFE
+f407ve_black.menu.upload_method.stlink=ST-LINK (OpenOCD)
+f407ve_black.menu.upload_method.stlink.upload.tool=openocd
+f407ve_black.menu.upload_method.stlink.upload.tool.default=openocd
+f407ve_black.menu.upload_method.stlink.upload.openocd_interface=interface/stlink.cfg
+f407ve_black.menu.upload_method.daplink=CMSIS-DAP / DAPLink / WeAct Mini Debugger (OpenOCD)
+f407ve_black.menu.upload_method.daplink.upload.tool=openocd
+f407ve_black.menu.upload_method.daplink.upload.tool.default=openocd
+f407ve_black.menu.upload_method.daplink.upload.openocd_interface=interface/cmsis-dap.cfg
+f407ve_black.menu.upload_method.jlink=SEGGER J-Link
+f407ve_black.menu.upload_method.jlink.upload.tool=jlink
+f407ve_black.menu.upload_method.jlink.upload.tool.default=jlink
+f407ve_black.menu.upload_method.pyocd=pyOCD (CMSIS-DAP, ST-LINK, J-Link; usa el pack del fabricante)
+f407ve_black.menu.upload_method.pyocd.upload.tool=pyocd
+f407ve_black.menu.upload_method.pyocd.upload.tool.default=pyocd
+f407ve_black.menu.upload_method.cubeprog=ST-LINK (STM32CubeProgrammer)
+f407ve_black.menu.upload_method.cubeprog.upload.tool=stm32cubeprog
+f407ve_black.menu.upload_method.cubeprog.upload.tool.default=stm32cubeprog
 f407ve_black.menu.opt.os=Más pequeño (-Os) [por defecto]
 f407ve_black.menu.opt.os.build.opt=-Os
 f407ve_black.menu.opt.o2=Rápido (-O2)
@@ -35,17 +55,9 @@ f407ve_black.menu.lto.off=Desactivado
 f407ve_black.menu.lto.off.build.lto=
 f407ve_black.menu.lto.on=Activado (-flto)
 f407ve_black.menu.lto.on.build.lto=-flto
-f407ve_black.menu.upload_method.stlink=ST-LINK (OpenOCD)
-f407ve_black.menu.upload_method.stlink.upload.tool=openocd
-f407ve_black.menu.upload_method.stlink.upload.tool.default=openocd
-f407ve_black.menu.upload_method.jlink=SEGGER J-Link
-f407ve_black.menu.upload_method.jlink.upload.tool=jlink
-f407ve_black.menu.upload_method.jlink.upload.tool.default=jlink
-f407ve_black.menu.upload_method.cubeprog=ST-LINK (STM32CubeProgrammer)
-f407ve_black.menu.upload_method.cubeprog.upload.tool=stm32cubeprog
-f407ve_black.menu.upload_method.cubeprog.upload.tool.default=stm32cubeprog
 
-# ---------------- Nucleo-32 STM32L432KC ----------------
+# ------------------------------------------------------------
+# Nucleo-32 STM32L432KC
 nucleo_l432kc.name=Nucleo-32 STM32L432KC
 nucleo_l432kc.build.core=arduino
 nucleo_l432kc.build.board=NUCLEO_L432KC
@@ -54,15 +66,33 @@ nucleo_l432kc.build.ldscript=ldscript.ld
 nucleo_l432kc.build.mcu=-mcpu=cortex-m4 -mfloat-abi=hard -mfpu=fpv4-sp-d16
 nucleo_l432kc.build.series_flags=-DSTM32L4xx -DSTM32L432xx
 nucleo_l432kc.build.vendor_dir=ST/L4
-nucleo_l432kc.build.hse=8000000
+nucleo_l432kc.build.hse_flags=-DHSE_VALUE=8000000
 nucleo_l432kc.upload.maximum_size=262144
 nucleo_l432kc.upload.maximum_data_size=65536
 nucleo_l432kc.upload.jlink_device=STM32L432KC
 nucleo_l432kc.upload.openocd_target=stm32l4x
+nucleo_l432kc.upload.pyocd_target=stm32l432kc
 nucleo_l432kc.menu.clock.fast=80 MHz (MSI + PLL)
 nucleo_l432kc.menu.clock.fast.build.clock_flags=
 nucleo_l432kc.menu.clock.safe=4 MHz (MSI) - modo seguro
 nucleo_l432kc.menu.clock.safe.build.clock_flags=-DCM_CLOCK_SAFE
+nucleo_l432kc.menu.upload_method.stlink=ST-LINK (OpenOCD)
+nucleo_l432kc.menu.upload_method.stlink.upload.tool=openocd
+nucleo_l432kc.menu.upload_method.stlink.upload.tool.default=openocd
+nucleo_l432kc.menu.upload_method.stlink.upload.openocd_interface=interface/stlink.cfg
+nucleo_l432kc.menu.upload_method.daplink=CMSIS-DAP / DAPLink / WeAct Mini Debugger (OpenOCD)
+nucleo_l432kc.menu.upload_method.daplink.upload.tool=openocd
+nucleo_l432kc.menu.upload_method.daplink.upload.tool.default=openocd
+nucleo_l432kc.menu.upload_method.daplink.upload.openocd_interface=interface/cmsis-dap.cfg
+nucleo_l432kc.menu.upload_method.jlink=SEGGER J-Link
+nucleo_l432kc.menu.upload_method.jlink.upload.tool=jlink
+nucleo_l432kc.menu.upload_method.jlink.upload.tool.default=jlink
+nucleo_l432kc.menu.upload_method.pyocd=pyOCD (CMSIS-DAP, ST-LINK, J-Link; usa el pack del fabricante)
+nucleo_l432kc.menu.upload_method.pyocd.upload.tool=pyocd
+nucleo_l432kc.menu.upload_method.pyocd.upload.tool.default=pyocd
+nucleo_l432kc.menu.upload_method.cubeprog=ST-LINK (STM32CubeProgrammer)
+nucleo_l432kc.menu.upload_method.cubeprog.upload.tool=stm32cubeprog
+nucleo_l432kc.menu.upload_method.cubeprog.upload.tool.default=stm32cubeprog
 nucleo_l432kc.menu.opt.os=Más pequeño (-Os) [por defecto]
 nucleo_l432kc.menu.opt.os.build.opt=-Os
 nucleo_l432kc.menu.opt.o2=Rápido (-O2)
@@ -75,17 +105,9 @@ nucleo_l432kc.menu.lto.off=Desactivado
 nucleo_l432kc.menu.lto.off.build.lto=
 nucleo_l432kc.menu.lto.on=Activado (-flto)
 nucleo_l432kc.menu.lto.on.build.lto=-flto
-nucleo_l432kc.menu.upload_method.stlink=ST-LINK (OpenOCD)
-nucleo_l432kc.menu.upload_method.stlink.upload.tool=openocd
-nucleo_l432kc.menu.upload_method.stlink.upload.tool.default=openocd
-nucleo_l432kc.menu.upload_method.jlink=SEGGER J-Link
-nucleo_l432kc.menu.upload_method.jlink.upload.tool=jlink
-nucleo_l432kc.menu.upload_method.jlink.upload.tool.default=jlink
-nucleo_l432kc.menu.upload_method.cubeprog=ST-LINK (STM32CubeProgrammer)
-nucleo_l432kc.menu.upload_method.cubeprog.upload.tool=stm32cubeprog
-nucleo_l432kc.menu.upload_method.cubeprog.upload.tool.default=stm32cubeprog
 
-# ---------------- WeAct STM32G431CBU6 ----------------
+# ------------------------------------------------------------
+# WeAct STM32G431CBU6
 weact_g431.name=WeAct STM32G431CBU6
 weact_g431.build.core=arduino
 weact_g431.build.board=WEACT_G431
@@ -94,15 +116,33 @@ weact_g431.build.ldscript=ldscript.ld
 weact_g431.build.mcu=-mcpu=cortex-m4 -mfloat-abi=hard -mfpu=fpv4-sp-d16
 weact_g431.build.series_flags=-DSTM32G4xx -DSTM32G431xx
 weact_g431.build.vendor_dir=ST/G4
-weact_g431.build.hse=8000000
+weact_g431.build.hse_flags=-DHSE_VALUE=8000000
 weact_g431.upload.maximum_size=131072
 weact_g431.upload.maximum_data_size=22528
 weact_g431.upload.jlink_device=STM32G431CB
 weact_g431.upload.openocd_target=stm32g4x
+weact_g431.upload.pyocd_target=stm32g431cbux
 weact_g431.menu.clock.fast=170 MHz (HSE 8 MHz + PLL, boost)
 weact_g431.menu.clock.fast.build.clock_flags=
 weact_g431.menu.clock.safe=16 MHz (HSI) - modo seguro
 weact_g431.menu.clock.safe.build.clock_flags=-DCM_CLOCK_SAFE
+weact_g431.menu.upload_method.stlink=ST-LINK (OpenOCD)
+weact_g431.menu.upload_method.stlink.upload.tool=openocd
+weact_g431.menu.upload_method.stlink.upload.tool.default=openocd
+weact_g431.menu.upload_method.stlink.upload.openocd_interface=interface/stlink.cfg
+weact_g431.menu.upload_method.daplink=CMSIS-DAP / DAPLink / WeAct Mini Debugger (OpenOCD)
+weact_g431.menu.upload_method.daplink.upload.tool=openocd
+weact_g431.menu.upload_method.daplink.upload.tool.default=openocd
+weact_g431.menu.upload_method.daplink.upload.openocd_interface=interface/cmsis-dap.cfg
+weact_g431.menu.upload_method.jlink=SEGGER J-Link
+weact_g431.menu.upload_method.jlink.upload.tool=jlink
+weact_g431.menu.upload_method.jlink.upload.tool.default=jlink
+weact_g431.menu.upload_method.pyocd=pyOCD (CMSIS-DAP, ST-LINK, J-Link; usa el pack del fabricante)
+weact_g431.menu.upload_method.pyocd.upload.tool=pyocd
+weact_g431.menu.upload_method.pyocd.upload.tool.default=pyocd
+weact_g431.menu.upload_method.cubeprog=ST-LINK (STM32CubeProgrammer)
+weact_g431.menu.upload_method.cubeprog.upload.tool=stm32cubeprog
+weact_g431.menu.upload_method.cubeprog.upload.tool.default=stm32cubeprog
 weact_g431.menu.opt.os=Más pequeño (-Os) [por defecto]
 weact_g431.menu.opt.os.build.opt=-Os
 weact_g431.menu.opt.o2=Rápido (-O2)
@@ -115,17 +155,9 @@ weact_g431.menu.lto.off=Desactivado
 weact_g431.menu.lto.off.build.lto=
 weact_g431.menu.lto.on=Activado (-flto)
 weact_g431.menu.lto.on.build.lto=-flto
-weact_g431.menu.upload_method.stlink=ST-LINK (OpenOCD)
-weact_g431.menu.upload_method.stlink.upload.tool=openocd
-weact_g431.menu.upload_method.stlink.upload.tool.default=openocd
-weact_g431.menu.upload_method.jlink=SEGGER J-Link
-weact_g431.menu.upload_method.jlink.upload.tool=jlink
-weact_g431.menu.upload_method.jlink.upload.tool.default=jlink
-weact_g431.menu.upload_method.cubeprog=ST-LINK (STM32CubeProgrammer)
-weact_g431.menu.upload_method.cubeprog.upload.tool=stm32cubeprog
-weact_g431.menu.upload_method.cubeprog.upload.tool.default=stm32cubeprog
 
-# ---------------- WeAct STM32WB55CGU6 ----------------
+# ------------------------------------------------------------
+# WeAct STM32WB55CGU6
 weact_wb55.name=WeAct STM32WB55CGU6
 weact_wb55.build.core=arduino
 weact_wb55.build.board=WEACT_WB55
@@ -134,15 +166,33 @@ weact_wb55.build.ldscript=ldscript.ld
 weact_wb55.build.mcu=-mcpu=cortex-m4 -mfloat-abi=hard -mfpu=fpv4-sp-d16
 weact_wb55.build.series_flags=-DSTM32WBxx -DSTM32WB55xx
 weact_wb55.build.vendor_dir=ST/WB
-weact_wb55.build.hse=32000000
+weact_wb55.build.hse_flags=-DHSE_VALUE=32000000
 weact_wb55.upload.maximum_size=524288
 weact_wb55.upload.maximum_data_size=196608
 weact_wb55.upload.jlink_device=STM32WB55CG
 weact_wb55.upload.openocd_target=stm32wbx
+weact_wb55.upload.pyocd_target=stm32wb55xg
 weact_wb55.menu.clock.fast=64 MHz (HSE 32 MHz + PLL)
 weact_wb55.menu.clock.fast.build.clock_flags=
 weact_wb55.menu.clock.safe=4 MHz (MSI) - modo seguro
 weact_wb55.menu.clock.safe.build.clock_flags=-DCM_CLOCK_SAFE
+weact_wb55.menu.upload_method.stlink=ST-LINK (OpenOCD)
+weact_wb55.menu.upload_method.stlink.upload.tool=openocd
+weact_wb55.menu.upload_method.stlink.upload.tool.default=openocd
+weact_wb55.menu.upload_method.stlink.upload.openocd_interface=interface/stlink.cfg
+weact_wb55.menu.upload_method.daplink=CMSIS-DAP / DAPLink / WeAct Mini Debugger (OpenOCD)
+weact_wb55.menu.upload_method.daplink.upload.tool=openocd
+weact_wb55.menu.upload_method.daplink.upload.tool.default=openocd
+weact_wb55.menu.upload_method.daplink.upload.openocd_interface=interface/cmsis-dap.cfg
+weact_wb55.menu.upload_method.jlink=SEGGER J-Link
+weact_wb55.menu.upload_method.jlink.upload.tool=jlink
+weact_wb55.menu.upload_method.jlink.upload.tool.default=jlink
+weact_wb55.menu.upload_method.pyocd=pyOCD (CMSIS-DAP, ST-LINK, J-Link; usa el pack del fabricante)
+weact_wb55.menu.upload_method.pyocd.upload.tool=pyocd
+weact_wb55.menu.upload_method.pyocd.upload.tool.default=pyocd
+weact_wb55.menu.upload_method.cubeprog=ST-LINK (STM32CubeProgrammer)
+weact_wb55.menu.upload_method.cubeprog.upload.tool=stm32cubeprog
+weact_wb55.menu.upload_method.cubeprog.upload.tool.default=stm32cubeprog
 weact_wb55.menu.opt.os=Más pequeño (-Os) [por defecto]
 weact_wb55.menu.opt.os.build.opt=-Os
 weact_wb55.menu.opt.o2=Rápido (-O2)
@@ -155,17 +205,9 @@ weact_wb55.menu.lto.off=Desactivado
 weact_wb55.menu.lto.off.build.lto=
 weact_wb55.menu.lto.on=Activado (-flto)
 weact_wb55.menu.lto.on.build.lto=-flto
-weact_wb55.menu.upload_method.stlink=ST-LINK (OpenOCD)
-weact_wb55.menu.upload_method.stlink.upload.tool=openocd
-weact_wb55.menu.upload_method.stlink.upload.tool.default=openocd
-weact_wb55.menu.upload_method.jlink=SEGGER J-Link
-weact_wb55.menu.upload_method.jlink.upload.tool=jlink
-weact_wb55.menu.upload_method.jlink.upload.tool.default=jlink
-weact_wb55.menu.upload_method.cubeprog=ST-LINK (STM32CubeProgrammer)
-weact_wb55.menu.upload_method.cubeprog.upload.tool=stm32cubeprog
-weact_wb55.menu.upload_method.cubeprog.upload.tool.default=stm32cubeprog
 
-# ---------------- STM32H503 (genérica) ----------------
+# ------------------------------------------------------------
+# STM32H503 (genérica)
 generic_h503.name=STM32H503 (genérica)
 generic_h503.build.core=arduino
 generic_h503.build.board=GENERIC_H503
@@ -174,14 +216,24 @@ generic_h503.build.ldscript=ldscript.ld
 generic_h503.build.mcu=-mcpu=cortex-m33 -mfloat-abi=hard -mfpu=fpv5-sp-d16
 generic_h503.build.series_flags=-DSTM32H5xx -DSTM32H503xx
 generic_h503.build.vendor_dir=ST/H5
-generic_h503.build.hse=25000000
+generic_h503.build.hse_flags=-DHSE_VALUE=25000000
 generic_h503.upload.maximum_size=131072
 generic_h503.upload.maximum_data_size=32768
 generic_h503.upload.jlink_device=STM32H503RB
+generic_h503.upload.pyocd_target=stm32h503rbtx
 generic_h503.menu.clock.fast=250 MHz (HSI + PLL1, VOS0)
 generic_h503.menu.clock.fast.build.clock_flags=
 generic_h503.menu.clock.safe=32 MHz (HSI/2) - modo seguro
 generic_h503.menu.clock.safe.build.clock_flags=-DCM_CLOCK_SAFE
+generic_h503.menu.upload_method.cubeprog=ST-LINK (STM32CubeProgrammer)
+generic_h503.menu.upload_method.cubeprog.upload.tool=stm32cubeprog
+generic_h503.menu.upload_method.cubeprog.upload.tool.default=stm32cubeprog
+generic_h503.menu.upload_method.jlink=SEGGER J-Link
+generic_h503.menu.upload_method.jlink.upload.tool=jlink
+generic_h503.menu.upload_method.jlink.upload.tool.default=jlink
+generic_h503.menu.upload_method.pyocd=pyOCD (CMSIS-DAP, ST-LINK, J-Link; usa el pack del fabricante)
+generic_h503.menu.upload_method.pyocd.upload.tool=pyocd
+generic_h503.menu.upload_method.pyocd.upload.tool.default=pyocd
 generic_h503.menu.opt.os=Más pequeño (-Os) [por defecto]
 generic_h503.menu.opt.os.build.opt=-Os
 generic_h503.menu.opt.o2=Rápido (-O2)
@@ -194,9 +246,130 @@ generic_h503.menu.lto.off=Desactivado
 generic_h503.menu.lto.off.build.lto=
 generic_h503.menu.lto.on=Activado (-flto)
 generic_h503.menu.lto.on.build.lto=-flto
-generic_h503.menu.upload_method.jlink=SEGGER J-Link
-generic_h503.menu.upload_method.jlink.upload.tool=jlink
-generic_h503.menu.upload_method.jlink.upload.tool.default=jlink
-generic_h503.menu.upload_method.cubeprog=ST-LINK (STM32CubeProgrammer)
-generic_h503.menu.upload_method.cubeprog.upload.tool=stm32cubeprog
-generic_h503.menu.upload_method.cubeprog.upload.tool.default=stm32cubeprog
+
+# ------------------------------------------------------------
+# GD32F427V-START
+gd32f427v_start.name=GD32F427V-START
+gd32f427v_start.build.core=arduino
+gd32f427v_start.build.board=GD32F427V_START
+gd32f427v_start.build.variant=GD32F427V_START
+gd32f427v_start.build.ldscript=ldscript.ld
+gd32f427v_start.build.mcu=-mcpu=cortex-m4 -mfloat-abi=hard -mfpu=fpv4-sp-d16
+gd32f427v_start.build.series_flags=-DGD32F4XX -DGD32F427
+gd32f427v_start.build.vendor_dir=GigaDevice/F4
+gd32f427v_start.build.hse_flags=-DHXTAL_VALUE=25000000
+gd32f427v_start.upload.maximum_size=3145728
+gd32f427v_start.upload.maximum_data_size=196608
+gd32f427v_start.upload.jlink_device=GD32F427VK
+gd32f427v_start.upload.openocd_target=stm32f4x
+gd32f427v_start.upload.pyocd_target=gd32f427vk
+gd32f427v_start.menu.clock.c200=200 MHz (cristal 25 MHz + PLL)
+gd32f427v_start.menu.clock.c200.build.clock_flags=-D__SYSTEM_CLOCK_200M_PLL_25M_HXTAL=200000000
+gd32f427v_start.menu.clock.c168=168 MHz (cristal 25 MHz + PLL)
+gd32f427v_start.menu.clock.c168.build.clock_flags=-D__SYSTEM_CLOCK_168M_PLL_25M_HXTAL=168000000
+gd32f427v_start.menu.clock.i200=200 MHz (IRC16M interno + PLL, sin cristal)
+gd32f427v_start.menu.clock.i200.build.clock_flags=-D__SYSTEM_CLOCK_200M_PLL_IRC16M=200000000
+gd32f427v_start.menu.clock.safe=16 MHz (IRC16M) - modo seguro
+gd32f427v_start.menu.clock.safe.build.clock_flags=-D__SYSTEM_CLOCK_IRC16M=16000000
+gd32f427v_start.menu.upload_method.daplink=CMSIS-DAP / DAPLink / WeAct Mini Debugger (OpenOCD)
+gd32f427v_start.menu.upload_method.daplink.upload.tool=openocd
+gd32f427v_start.menu.upload_method.daplink.upload.tool.default=openocd
+gd32f427v_start.menu.upload_method.daplink.upload.openocd_interface=interface/cmsis-dap.cfg
+gd32f427v_start.menu.upload_method.jlink=SEGGER J-Link
+gd32f427v_start.menu.upload_method.jlink.upload.tool=jlink
+gd32f427v_start.menu.upload_method.jlink.upload.tool.default=jlink
+gd32f427v_start.menu.upload_method.pyocd=pyOCD (CMSIS-DAP, ST-LINK, J-Link; usa el pack del fabricante)
+gd32f427v_start.menu.upload_method.pyocd.upload.tool=pyocd
+gd32f427v_start.menu.upload_method.pyocd.upload.tool.default=pyocd
+gd32f427v_start.menu.upload_method.stlink=ST-LINK (OpenOCD)
+gd32f427v_start.menu.upload_method.stlink.upload.tool=openocd
+gd32f427v_start.menu.upload_method.stlink.upload.tool.default=openocd
+gd32f427v_start.menu.upload_method.stlink.upload.openocd_interface=interface/stlink.cfg
+gd32f427v_start.menu.opt.os=Más pequeño (-Os) [por defecto]
+gd32f427v_start.menu.opt.os.build.opt=-Os
+gd32f427v_start.menu.opt.o2=Rápido (-O2)
+gd32f427v_start.menu.opt.o2.build.opt=-O2
+gd32f427v_start.menu.opt.o3=Más rápido (-O3)
+gd32f427v_start.menu.opt.o3.build.opt=-O3
+gd32f427v_start.menu.opt.og=Depuración (-Og)
+gd32f427v_start.menu.opt.og.build.opt=-Og
+gd32f427v_start.menu.lto.off=Desactivado
+gd32f427v_start.menu.lto.off.build.lto=
+gd32f427v_start.menu.lto.on=Activado (-flto)
+gd32f427v_start.menu.lto.on.build.lto=-flto
+
+# ------------------------------------------------------------
+# WeAct AT32F403ACGU7
+weact_at32f403a.name=WeAct AT32F403ACGU7
+weact_at32f403a.build.core=arduino
+weact_at32f403a.build.board=WEACT_AT32F403A
+weact_at32f403a.build.variant=WEACT_AT32F403A
+weact_at32f403a.build.ldscript=ldscript.ld
+weact_at32f403a.build.mcu=-mcpu=cortex-m4 -mfloat-abi=hard -mfpu=fpv4-sp-d16
+weact_at32f403a.build.series_flags=-DAT32F403A_407 -DAT32F403ACGU7 -DUSE_STDPERIPH_DRIVER
+weact_at32f403a.build.vendor_dir=Artery/F403A
+weact_at32f403a.build.hse_flags=-DHEXT_VALUE=8000000
+weact_at32f403a.upload.maximum_size=1048576
+weact_at32f403a.upload.maximum_data_size=98304
+weact_at32f403a.upload.jlink_device=AT32F403ACGU7
+weact_at32f403a.upload.pyocd_target=at32f403acgu7
+weact_at32f403a.menu.clock.fast=240 MHz (HEXT 8 MHz + PLL)
+weact_at32f403a.menu.clock.fast.build.clock_flags=
+weact_at32f403a.menu.clock.safe=8 MHz (HICK) - modo seguro
+weact_at32f403a.menu.clock.safe.build.clock_flags=-DCM_CLOCK_SAFE
+weact_at32f403a.menu.upload_method.jlink=SEGGER J-Link
+weact_at32f403a.menu.upload_method.jlink.upload.tool=jlink
+weact_at32f403a.menu.upload_method.jlink.upload.tool.default=jlink
+weact_at32f403a.menu.upload_method.pyocd=pyOCD (CMSIS-DAP, ST-LINK, J-Link; usa el pack del fabricante)
+weact_at32f403a.menu.upload_method.pyocd.upload.tool=pyocd
+weact_at32f403a.menu.upload_method.pyocd.upload.tool.default=pyocd
+weact_at32f403a.menu.opt.os=Más pequeño (-Os) [por defecto]
+weact_at32f403a.menu.opt.os.build.opt=-Os
+weact_at32f403a.menu.opt.o2=Rápido (-O2)
+weact_at32f403a.menu.opt.o2.build.opt=-O2
+weact_at32f403a.menu.opt.o3=Más rápido (-O3)
+weact_at32f403a.menu.opt.o3.build.opt=-O3
+weact_at32f403a.menu.opt.og=Depuración (-Og)
+weact_at32f403a.menu.opt.og.build.opt=-Og
+weact_at32f403a.menu.lto.off=Desactivado
+weact_at32f403a.menu.lto.off.build.lto=
+weact_at32f403a.menu.lto.on=Activado (-flto)
+weact_at32f403a.menu.lto.on.build.lto=-flto
+
+# ------------------------------------------------------------
+# AT-START-F437 (AT32F437ZMT7)
+atstart_f437.name=AT-START-F437 (AT32F437ZMT7)
+atstart_f437.build.core=arduino
+atstart_f437.build.board=ATSTART_F437
+atstart_f437.build.variant=ATSTART_F437
+atstart_f437.build.ldscript=ldscript.ld
+atstart_f437.build.mcu=-mcpu=cortex-m4 -mfloat-abi=hard -mfpu=fpv4-sp-d16
+atstart_f437.build.series_flags=-DAT32F435_437 -DAT32F437ZMT7 -DUSE_STDPERIPH_DRIVER
+atstart_f437.build.vendor_dir=Artery/F43x
+atstart_f437.build.hse_flags=-DHEXT_VALUE=8000000
+atstart_f437.upload.maximum_size=4128768
+atstart_f437.upload.maximum_data_size=393216
+atstart_f437.upload.jlink_device=AT32F437ZMT7
+atstart_f437.upload.pyocd_target=at32f437zmt7
+atstart_f437.menu.clock.fast=288 MHz (HEXT 8 MHz + PLL)
+atstart_f437.menu.clock.fast.build.clock_flags=
+atstart_f437.menu.clock.safe=8 MHz (HICK) - modo seguro
+atstart_f437.menu.clock.safe.build.clock_flags=-DCM_CLOCK_SAFE
+atstart_f437.menu.upload_method.jlink=SEGGER J-Link
+atstart_f437.menu.upload_method.jlink.upload.tool=jlink
+atstart_f437.menu.upload_method.jlink.upload.tool.default=jlink
+atstart_f437.menu.upload_method.pyocd=pyOCD (CMSIS-DAP, ST-LINK, J-Link; usa el pack del fabricante)
+atstart_f437.menu.upload_method.pyocd.upload.tool=pyocd
+atstart_f437.menu.upload_method.pyocd.upload.tool.default=pyocd
+atstart_f437.menu.opt.os=Más pequeño (-Os) [por defecto]
+atstart_f437.menu.opt.os.build.opt=-Os
+atstart_f437.menu.opt.o2=Rápido (-O2)
+atstart_f437.menu.opt.o2.build.opt=-O2
+atstart_f437.menu.opt.o3=Más rápido (-O3)
+atstart_f437.menu.opt.o3.build.opt=-O3
+atstart_f437.menu.opt.og=Depuración (-Og)
+atstart_f437.menu.opt.og.build.opt=-Og
+atstart_f437.menu.lto.off=Desactivado
+atstart_f437.menu.lto.off.build.lto=
+atstart_f437.menu.lto.on=Activado (-flto)
+atstart_f437.menu.lto.on.build.lto=-flto
